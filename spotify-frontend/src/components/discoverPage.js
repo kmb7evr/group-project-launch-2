@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 
 function DiscoverPage(props) {
     const {user, logout} = props;
-    const [userData, setUserData]=useState(["dummy1", "dummy2", "dummy3"]);
+    const [userData, setUserData]=useState([{username: "dummy1"}, {username: "dummy2"}, {username: "dummy3"}]);
 
     useEffect(()=>{
       fetch("http://localhost:9000/users")
@@ -16,7 +16,7 @@ function DiscoverPage(props) {
     const tableCell=(element)=>{
       return (
       <tr>
-        <td>{element}</td>{/*TODO: make this a link to the user's profile */}
+        <td>{element.username}</td>{/*TODO: make this a link to the user's profile */}
         <td><button type="button">Send Message</button></td>
       </tr>
       );
