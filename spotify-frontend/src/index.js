@@ -9,6 +9,7 @@ import TopSongs from "./components/topSongs";
 import TopArtists from "./components/topArtists";
 import Inbox from "./components/inbox";
 import UserProfile from "./components/userProfile";
+import IndivForum from "./components/IndivForum";
 
 const rootElement = document.getElementById("root");
 render(
@@ -21,6 +22,7 @@ render(
       <Route path="TopArtists" element={<TopArtists />} />
       <Route path="Inbox" element={<Inbox />} />
       <Route path="UserProfile" element={<UserProfile />} />
+      <Route path='Forum/indivForum' element={<IndivForum/>}/>
     </Routes>
   </BrowserRouter>,
   rootElement
