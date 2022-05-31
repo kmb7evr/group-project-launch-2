@@ -4,12 +4,12 @@ import {useState, useEffect} from 'react';
 
 function DiscoverPage(props) {
     const {user, logout} = props;
-    const [userData, setUserData]=useState([{username: "dummy1"}, {username: "dummy2"}, {username: "dummy3"}]);
+    const [userData, setUserData]=useState();
 
     useEffect(()=>{
-      fetch("http://localhost:9000/users")
+      fetch("http://localhost:9000/users/data")
     .then((res) => {return (res.json());})
-    .then((text) => {console.log(JSON.stringify(text.result))})
+    .then((text) => {setUserData(text.result)})
     .catch((err) => console.log(err))
     },[]);
 
