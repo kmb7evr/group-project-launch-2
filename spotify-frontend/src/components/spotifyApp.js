@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import DiscoverPage from "./DiscoverPage";
+import DiscoverPage from "./discoverPage";
 import LoginPage from "./loginPage";
 
 function SpotifyApp() {
