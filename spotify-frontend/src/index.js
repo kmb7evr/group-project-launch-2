@@ -10,6 +10,7 @@ import TopArtists from "./components/topArtists";
 import Inbox from "./components/inbox";
 import UserProfile from "./components/userProfile";
 import IndivForum from "./components/IndivForum";
+import Conversation from "./components/Conversation";
 
 const rootElement = document.getElementById("root");
 render(
@@ -23,6 +24,7 @@ render(
       <Route path="Inbox" element={<Inbox />} />
       <Route path="UserProfile" element={<UserProfile />} />
       <Route path='Forum/indivForum' element={<IndivForum/>}/>
+      <Route path='Inbox/Conversation' element={<Conversation/>}/>
     </Routes>
   </BrowserRouter>,
   rootElement

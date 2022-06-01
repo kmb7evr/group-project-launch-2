@@ -9,7 +9,7 @@ function Navbar() {
         <Link to="/TopSongs">Top Songs</Link> |{" "}
         <Link to="/TopArtists">Top Artists</Link> |{" "}
         <Link to="/Inbox">Inbox</Link> |{" "}
-        <Link to="/UserProfile">User Profile</Link> |{" "}
+        <Link to="/UserProfile">User Profile</Link> {" "}
     </div>
     );
   }
