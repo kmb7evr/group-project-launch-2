@@ -1,6 +1,7 @@
 import { Button, Typography, Box } from '@mui/material';
 import Navbar from "./navbar";
 import {useState, useEffect} from 'react';
+import { Link, Outlet } from 'react-router-dom';
 
 function DiscoverPage(props) {
     const {user, logout} = props;
@@ -16,7 +17,7 @@ function DiscoverPage(props) {
     const tableCell=(element)=>{
       return (
       <tr>
-        <td>{element.username}</td>{/*TODO: make this a link to the user's profile */}
+        <td><Link to="/OtherUserComponent" state={{user: element}}>{element.username}</Link> </td>{/*TODO: make this a link to the user's profile */}
         <td><button type="button">Send Message</button></td>
       </tr>
       );
