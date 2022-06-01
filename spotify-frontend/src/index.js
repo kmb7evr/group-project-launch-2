@@ -11,6 +11,7 @@ import Inbox from "./components/inbox";
 import UserProfile from "./components/userProfile";
 import IndivForum from "./components/IndivForum";
 import OtherUserComponent from "./components/otherUserComponent";
+import Navbar from "./components/navbar";
 
 const rootElement = document.getElementById("root");
 render(
@@ -23,8 +24,10 @@ render(
       <Route path="TopArtists" element={<TopArtists />} />
       <Route path="Inbox" element={<Inbox />} />
       <Route path="UserProfile" element={<UserProfile />} />
-      <Route path='OtherUserComponent' element={<OtherUserComponent />}/>
-      <Route path='Forum/indivForum' element={<IndivForum/>}/>
+      <Route path='OtherUserComponent' element={<OtherUserComponent />} />
+      <Route path='Forum/indivForum' element={<IndivForum />} />
+      <Route path="NavBar" element={<Navbar />} />
+
     </Routes>
   </BrowserRouter>,
   rootElement
