@@ -17,7 +17,7 @@ function DiscoverPage(props) {
     const tableCell=(element)=>{
       return (
       <tr>
-        <td><Link to="/OtherUserComponent" state={{user: element}}>{element.username}</Link> </td>{/*TODO: make this a link to the user's profile */}
+        <td><Link to="/OtherUserComponent" state={{user: element}}>{element.username}</Link> </td>
         <td><button type="button">Send Message</button></td>
       </tr>
       );
@@ -31,7 +31,7 @@ function DiscoverPage(props) {
         Log Out
       </Button>
       <table>
-        {userData && userData.map((user) => tableCell(user))}
+        {userData && userData.map((user) => user.isPublic && tableCell(user))}
       </table>
     </div>
   );
