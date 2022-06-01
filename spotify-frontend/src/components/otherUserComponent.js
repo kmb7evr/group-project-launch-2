@@ -1,10 +1,22 @@
 import Navbar from "./navbar";
 import { useLocation } from 'react-router-dom'
+import { useState } from 'react';
 
 function OtherUserComponent() {
 
   const location = useLocation();
-const { user } = location.state;
+  const { user } = location.state;
+  const [privacy, setPrivacy] = useState(user.isPublic)
+
+  const switchPrivacy = () => {
+    /* TODO: connect to firebase and update the isPublic boolean*/
+    if (privacy) {
+      setPrivacy(false)
+    }
+    else {
+      setPrivacy(true)
+    }
+  }
     return (
       <div className="App">
           <h2> {user.username}'s Profile </h2>
@@ -16,18 +28,17 @@ const { user } = location.state;
           </tr>
           <tr>
             <td>First name: </td>
-            <td>blah blah blah</td>
+            <td>{user.firstName}</td>
           </tr>
           <tr>
             <td>Last name: </td>
-            <td>blah blah blah</td>
+            <td>{user.lastName} </td>
           </tr>
-          {/* {<tr>
-            <td>Make private: </td>
-            <td><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/></td>
-          </tr>} */}
+          <tr>
+            <td>Email: </td>
+            <td>{user.email} </td>
+          </tr>
           </table>
-          <button type="button">Save Changes</button>
       </div>
     );
   }
