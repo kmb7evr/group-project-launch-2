@@ -1,15 +1,69 @@
 import Navbar from "./navbar";
 import { useLocation } from 'react-router-dom'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { unstable_createMuiStrictModeTheme } from "@mui/material";
 
 function UserProfile() {
 
     const location = useLocation();
     const user=location.state?.currUser
     const [privacy, setPrivacy] = useState(user.isPublic)
-    console.log(user.id)
+    const [username1, setUsername1] = useState(user.username)
+    const [firstName1, setFirstName1] = useState(user.firstName)
+    const [lastName1, setLastName1] = useState(user.lastName)
+    const [email1, setEmail1] = useState(user.email)
+    const userRef1 = useRef();
+    const userRef2 = useRef();
+    const userRef3 = useRef();
+    const userRef4 = useRef();
+  
+    const updateUsername = async (userID) => {
+      const val = userRef1.current.value;
+      axios.put("http://localhost:9000/users/username", {
+        id: userID,
+        username: val
+      })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err))
+      userRef1.current.value = "";
+      setUsername1(val)
+    }
+
+    const updateFirstName = async (userID) => {
+        const val = userRef2.current.value;
+        axios.put("http://localhost:9000/users/firstname", {
+          id: userID,
+          firstName: val
+        })
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err))
+        userRef2.current.value = "";
+        setFirstName1(val)
+      }
+
+      const updateLastName = async (userID) => {
+        const val = userRef3.current.value;
+        axios.put("http://localhost:9000/users/lastname", {
+          id: userID,
+          lastName: val
+        })
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err))
+        userRef3.current.value = "";
+        setLastName1(val)
+      }
+
+      const updateEmail = async (userID) => {
+        const val = userRef4.current.value;
+        axios.put("http://localhost:9000/users/email", {
+          id: userID,
+          email: val
+        })
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err))
+        userRef4.current.value = "";
+        setEmail1(val)
+      }
 
     const switchPrivacy = async (userID) => {
         const bool = (!privacy)
@@ -29,19 +83,27 @@ function UserProfile() {
           <table>
           <tr>
             <td>Username: </td>
-            <td>{user.username}</td>
+            <td>{username1}</td>
+            <input ref={userRef1} placeholder={"Edit Username..."} />
+            <button onClick={() => updateUsername(user.id)} >Change</button>
           </tr>
           <tr>
             <td>First name: </td>
-            <td>{user.firstName}</td>
+            <td>{firstName1}</td>
+            <input ref={userRef2} placeholder={"Edit First Name..."} />
+            <button onClick={() => updateFirstName(user.id)} >Change</button>
           </tr>
           <tr>
             <td>Last name: </td>
-            <td>{user.lastName} </td>
+            <td>{lastName1} </td>
+            <input ref={userRef3} placeholder={"Edit Last Name..."} />
+            <button onClick={() => updateLastName(user.id)} >Change</button>
           </tr>
           <tr>
             <td>Email: </td>
-            <td>{user.email} </td>
+            <td>{email1} </td>
+            <input ref={userRef4} placeholder={"Edit Email..."} />
+            <button onClick={() => updateEmail(user.id)} >Change</button>
           </tr>
           </table>
           <button type="button">Save Changes</button>

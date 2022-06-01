@@ -20,4 +20,36 @@ router.put("/privacy", async (req, res, next) => {
   res.send("Received")
 })
 
+router.put("/username", async (req, res, next) => {
+  const postRef = doc(db, "users", req.body.id);
+  await updateDoc(postRef, {
+     username: req.body.username
+  });
+  res.send("Received")
+})
+
+router.put("/firstname", async (req, res, next) => {
+  const postRef = doc(db, "users", req.body.id);
+  await updateDoc(postRef, {
+     firstName: req.body.firstName
+  });
+  res.send("Received")
+})
+
+router.put("/lastname", async (req, res, next) => {
+  const postRef = doc(db, "users", req.body.id);
+  await updateDoc(postRef, {
+     lastName: req.body.lastName
+  });
+  res.send("Received")
+})
+
+router.put("/email", async (req, res, next) => {
+  const postRef = doc(db, "users", req.body.id);
+  await updateDoc(postRef, {
+     email: req.body.email
+  });
+  res.send("Received")
+})
+
 module.exports = router;
