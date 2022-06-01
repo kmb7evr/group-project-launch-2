@@ -39,9 +39,6 @@ function OtherUserComponent() {
             <td>{user.email} </td>
           </tr>
           </table>
-          <button type="button">Save Changes</button>
-          <td> {privacy ? "Your profile is currently PUBLIC. Would you like to switch to PRIVATE?" : "Your profile is current PRIVATE. Would you like to switch to PUBLIC?"} </td>
-          <button type="button" onClick={switchPrivacy}>Yes, switch my privacy settings </button>
       </div>
     );
   }
