@@ -26,6 +26,10 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+
+// router.get()
+
+
 router.get("/data", async (req, res, next) => {
   const allDocData = []
   // console.log(req.query)  // shows the URL params (stuff after the ? in the URL)
