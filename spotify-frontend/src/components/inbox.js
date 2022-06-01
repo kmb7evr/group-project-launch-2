@@ -1,10 +1,70 @@
 import Navbar from "./navbar";
+import axios from "axios"
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import Button from '@mui/material/Button';
+import Conversation from './Conversation.js'
+import { useLocation } from 'react-router-dom';
 
 function Inbox() {
-    return (
+  const [convPart, setConvPart]=useState("");
+  const location = useLocation();
+  const [contactList, setContactList]=useState([]);
+  const newConversationRef = useRef(null);
+  const [allUsers, setallUsers]=useState([]);
+  const userName="testOther"
+
+
+useEffect(() => {
+  fetch("http://localhost:9000/inbox/conversations?name=" + userName)
+  .then((res) => res.json())
+  .then((text) => setContactList(text.result))
+  .catch((err) => console.log(err))
+
+  fetch("http://localhost:9000/inbox/getUsers")
+  .then((res) => res.json())
+  .then((text) => setallUsers(text.result))
+  .catch((err) => console.log(err))
+
+}, [])
+//.then((text) => setContactList(text.contactList)) 
+
+const setPartner = (e) => {
+  e.preventDefault();
+  setConvPart(newConversationRef.current.value)
+  newConversationRef.current.value=""
+  return false;
+}
+    return ( //need to add datalist capabilities
       <div className="App">
           <h2> Inbox </h2>
-          <Navbar />
+          <Navbar /> <br></br>
+          <form onSubmit={setPartner}> 
+            <input type="text" ref={newConversationRef}/> <br></br>
+            <input type="submit" value="Start Conversation"/>
+          </form>
+
+          {console.log(convPart)}
+          {convPart!=="" && //may need to change that
+            <Link to='Conversation' state={{contact: convPart, userName: userName}}>
+              <Button
+                variant='outlined'
+                sx={{ color: '#000000', borderColor: '#000000' }}>Start New Conversation With: {convPart}<br></br>
+              </Button>
+              <br></br>
+            </Link>
+          }
+
+          <h1>Conversations: </h1>
+          {contactList.map((contact, index) => 
+          <Link to='Conversation' state={{contact: contact, userName: userName}}>
+            <Button
+            variant='outlined'
+            sx={{ color: '#000000', borderColor: '#000000' }}>{contact}<br></br>
+            </Button>
+            <br></br>
+          </Link>)
+        }
       </div>
     );
   }
