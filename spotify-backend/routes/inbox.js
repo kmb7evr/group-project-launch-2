@@ -16,10 +16,10 @@ router.get("/conversations", async(req, res, next) => {
             time2 = b.time;
 
         if (time1 < time2) {
-            return -1;
+            return 1;
         }
         if (time1 > time2) {
-            return 1;
+            return -1;
         }
         return 0;
     });
@@ -38,10 +38,6 @@ router.get("/indivConversation", async(req, res, next) => {
 
     const name=req.query.name.split('?')[0] //name of user
     const otherName=req.query.name.split('?')[1] //name of otherUser
-
-    console.log(req.query.name)
-    console.log(req.query.name.split('?')[0])
-    console.log(req.query.name.split('?')[1])
     const allMess = query(collection(db, "messages"), where("user", "==", name), where("otherUser", "==", otherName)); // may need to change this query
     const allMessages = await getDocs(allMess);
     allMessages.forEach((doc) => messages.push({id: doc.id, ...doc.data()}))
@@ -51,10 +47,10 @@ router.get("/indivConversation", async(req, res, next) => {
             time2 = b.time;
 
         if (time1 < time2) {
-            return -1;
+            return 1;
         }
         if (time1 > time2) {
-            return 1;
+            return -1;
         }
         return 0;
     });
@@ -96,7 +92,14 @@ router.get("/getUsers", async(req, res, next) => {
     const users=[]
     const allUsers = await getDocs(collection(db, "users"))
     allUsers.forEach((doc) => users.push({ id: doc.id, ...doc.data()} ))
-    res.json({result: allUsers})
+
+    const userNamesOnlyArr=[]
+    for(let i=0; i<users.length; i++) {
+        userNamesOnlyArr.push(users[i].spotifyUsername)
+    }
+
+    //console.log(userNamesOnlyArr)
+    res.json({result: userNamesOnlyArr})
 })
 
 module.exports = router

@@ -7,6 +7,8 @@ import Forum from './IndivForum.js'
 import { useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import IndivForum from "./IndivForum.js";
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 function Conversation() {
     const location = useLocation();
@@ -43,17 +45,24 @@ function Conversation() {
   return (
     <center>
     <div className="IndivConversation">
-    <Link to="/Inbox">Return to Inbox</Link> 
-    <h1>Conversation with: {contact}</h1>
-    <form onSubmit={sendMessage} >
-            <h1>New Message</h1>
-            <input type="text" ref={messageRef}/> <br></br><br></br>
-            <input type="submit" value="Send Message"/>
-    </form>
+        <Link to="/Inbox">Return to Inbox</Link> 
+        <h1>Conversation with: {contact}</h1>
+        <form onSubmit={sendMessage} >
+                New Message:
+                <textarea type="text" ref={messageRef} rows="4" cols="50"/>
+                <input type="submit" value="Send Message"/>
+        </form>
 
-    {conversation && conversation.map((c, index) => 
-        <p>{c.message}</p>
-    )}
+        {conversation && conversation.map((c, index) => 
+            {return c.sent ?
+                <div>
+                    <p>Sent: {c.message}</p>
+                </div>:
+                <div>
+                    <p>Recieved: {c.message}</p> 
+                </div>
+            }
+        )}
     </div>
     </center>
   );
