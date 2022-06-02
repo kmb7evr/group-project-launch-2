@@ -3,8 +3,9 @@ import { useLocation } from "react-router";
 import { useState, useEffect } from "react";
 
 
-function TopSongs() {
+function TopSongs(props) {
   const location = useLocation();
+  const user=location.state?.currUser
   const [songs, setSongs] = useState([])
 
   const accessToken = location.state?.accessToken;
@@ -20,7 +21,7 @@ function TopSongs() {
   return (
     <div className="App">
       <h2> Top Songs </h2>
-      <Navbar />
+      <Navbar accessToken={props.accessToken} user={props.user} />
       {songs.length > 0 &&
         songs.map((val, key) => {
           return <p>{val.track.name} by {val.track.artists[0].name}</p>
