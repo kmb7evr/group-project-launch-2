@@ -26,6 +26,7 @@ function DiscoverPage(props) {
       .then(data => setCurrUsername(data.display_name))
   }, []);
 
+
   useEffect(() => {
     if (userData && currUsername) {
       let found = false;
@@ -77,6 +78,9 @@ function DiscoverPage(props) {
       // topSongsM={topsongsM}
       // likedSongs={likedSongs}
       />
+      <Button  variant="contained">
+        Log Out
+      </Button>
       <table>
         {userData && userData.map((user) => user.isPublic && tableCell(user))}
       </table>

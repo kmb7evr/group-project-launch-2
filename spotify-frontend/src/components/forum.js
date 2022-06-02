@@ -7,7 +7,11 @@ import TextField from "@mui/material/TextField";
 import "../App.css";
 import FilterList from './filterList.js'
 import { useLocation } from 'react-router-dom';
+
 import { AccessTokenContext } from "../Contexts/accessTokenContext";
+
+
+import {buttonStyle} from './pagecss.js';
 
 
 function Forum() {
@@ -53,34 +57,24 @@ function Forum() {
         <h2> Forum </h2>
         <Navbar /> <br></br>
 
-        <div className="search">
-          <TextField varient='outlined'
-            id="outlined-basic"
-            onChange={inputHandler}
-            variant="outlined"
-            label="Search"
-          /> <br></br> <br></br>  <br></br>
-          <FilterList forumNames={forumNames} input={inputText} user={user} />
-        </div>
-        <hr></hr>
-        <form onSubmit={addForum} >
-          <h1>Create New Forum</h1>
-          <textarea type="text" ref={newForumNameRef} rows="2" cols="50"
-            style={{ borderRadius: '25px' }} />
-          <input type="submit" value="Create New Forum" style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'blue',
-            border: '1px solid rgba(0, 0, 0, 0.05)',
-            height: "50px",
-            width: "200px",
-            fontSize: '20px',
-            borderRadius: '10px',
-            padding: '20px'
-          }} />
-        </form>
-      </center>
+
+          <div className="search">
+            <TextField varient='outlined'
+              id="outlined-basic"
+              onChange={inputHandler}
+              variant="outlined"
+              label="Search"
+            /> <br></br> <br></br>  <br></br> 
+            <FilterList forumNames={forumNames} input={inputText} user={user} />
+          </div>
+          <hr></hr>
+          <form onSubmit={addForum} >
+              <h1>Create New Forum</h1>
+              <textarea type="text" ref={newForumNameRef} rows="2" cols="50"
+                style={{borderRadius: '25px'}}/>
+                <input type="submit" value="Create New Forum" style={buttonStyle}/>
+          </form>
+        </center>
 
     </div>
   );
