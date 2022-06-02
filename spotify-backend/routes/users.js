@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const db = require("./firebase")
 
-const {getDocs, doc, collection, addDoc, updateDoc} = require("firebase/firestore")
+const { getDocs, doc, collection, addDoc, updateDoc } = require("firebase/firestore")
 var fetch = require('node-fetch');
 
 
@@ -27,8 +27,25 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/usernameget', async (req, res, next) => {
+  try {
+    console.log(req.query.token)
+    const url = 'https://api.spotify.com/v1/me/'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
 
-// router.get()
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
 
 
 
@@ -43,7 +60,7 @@ router.get("/data", async (req, res, next) => {
 router.put("/privacy", async (req, res, next) => {
   const postRef = doc(db, "users", req.body.id);
   await updateDoc(postRef, {
-     isPublic: req.body.isPublic
+    isPublic: req.body.isPublic
   });
   res.send("Received")
 })
@@ -51,7 +68,7 @@ router.put("/privacy", async (req, res, next) => {
 router.put("/username", async (req, res, next) => {
   const postRef = doc(db, "users", req.body.id);
   await updateDoc(postRef, {
-     username: req.body.username
+    username: req.body.username
   });
   res.send("Received")
 })
@@ -59,7 +76,7 @@ router.put("/username", async (req, res, next) => {
 router.put("/firstname", async (req, res, next) => {
   const postRef = doc(db, "users", req.body.id);
   await updateDoc(postRef, {
-     firstName: req.body.firstName
+    firstName: req.body.firstName
   });
   res.send("Received")
 })
@@ -67,7 +84,7 @@ router.put("/firstname", async (req, res, next) => {
 router.put("/lastname", async (req, res, next) => {
   const postRef = doc(db, "users", req.body.id);
   await updateDoc(postRef, {
-     lastName: req.body.lastName
+    lastName: req.body.lastName
   });
   res.send("Received")
 })
@@ -75,7 +92,7 @@ router.put("/lastname", async (req, res, next) => {
 router.put("/email", async (req, res, next) => {
   const postRef = doc(db, "users", req.body.id);
   await updateDoc(postRef, {
-     email: req.body.email
+    email: req.body.email
   });
   res.send("Received")
 })

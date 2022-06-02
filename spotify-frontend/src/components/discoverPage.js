@@ -10,7 +10,6 @@ function DiscoverPage(props) {
   const [userData, setUserData] = useState();
 
   const { accessToken } = useContext(AccessTokenContext);
-  console.log(AccessTokenContext)
   useEffect(() => {
     fetch("http://localhost:9000/users/data")
       .then((res) => { return (res.json()); })
@@ -23,7 +22,7 @@ function DiscoverPage(props) {
       <tr>
 
 
-        <td><Link to="/OtherUserComponent" state={{user: element}}>{element.username}</Link> </td>
+        <td><Link to="/OtherUserComponent" state={{ user: element }}>{element.username}</Link> </td>
         <td><button type="button">Send Message</button></td>
       </tr>
     );
