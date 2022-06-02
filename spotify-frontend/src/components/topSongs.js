@@ -1,18 +1,44 @@
 import Navbar from "./navbar";
 import { useLocation } from "react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Box, Card, CardMedia, Typography, CardContent } from '@mui/material/';
+import { AccessTokenContext } from "../Contexts/accessTokenContext";
+// import AccessTokenProvider from "./Contexts/accessTokenContext";
 
 
 function TopSongs(props) {
-  const location = useLocation();
-  const songs = location.state?.songs;
-  const yearSongs = location.state?.yearSongs;
-  const monthSongs = location.state?.monthSongs;
+  const [songs, setTopSongs] = useState([]);
+  const [yearSongs, setTopSongsY] = useState([]);
+  const [monthSongs, setTopSongsM] = useState([]);
+  // const location = useLocation();
+  // const songs = location.state?.topSongs;
+  // const yearSongs = location.state?.yearSongs;
+  // const monthSongs = location.state?.monthSongs;
+  // const likedSongs = location.state?.likedSongs;
+  // const accessToken = location.state?.accessToken;
+  const { accessToken } = useContext(AccessTokenContext);
+  useEffect(() => {
+    fetch("http://localhost:9000/users/trackAll?token=" + accessToken).then(res => res.json())
+      .then(data => setTopSongs(data.items))
+    fetch("http://localhost:9000/users/trackYear?token=" + accessToken).then(res => res.json())
+      .then(data => setTopSongsY(data.items))
+    fetch("http://localhost:9000/users/trackMonth?token=" + accessToken).then(res => res.json())
+      .then(data => setTopSongsM(data.items))
+
+  }, [])
+
+
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar
+      // likedSongs={likedSongs}
+      // topSongs={songs}
+      // yearSongs={yearSongs}
+      // monthSongs={monthSongs}
+      // accessToken={accessToken}
+
+      />
       <h1>Top Songs</h1>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         <Typography component="div" variant="h5">
@@ -29,7 +55,7 @@ function TopSongs(props) {
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         <Box>
 
-          {songs.length > 0 &&
+          {songs &&
             songs.map((val, key) => {
               return (<Box>
                 <Card sx={{
@@ -74,7 +100,8 @@ function TopSongs(props) {
         </Box>
 
         <Box>
-          {yearSongs.length > 0 &&
+          {console.log(yearSongs)}
+          {yearSongs &&
             yearSongs.map((val, key) => {
               return (<Box>
                 <Card sx={{
@@ -118,7 +145,9 @@ function TopSongs(props) {
           }
         </Box>
         <Box>
-          {monthSongs.length > 0 &&
+          {console.log(monthSongs)}
+
+          {monthSongs &&
             monthSongs.map((val, key) => {
               return (<Box>
                 <Card sx={{

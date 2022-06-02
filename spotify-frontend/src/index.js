@@ -13,25 +13,31 @@ import IndivForum from "./components/IndivForum";
 import Conversation from "./components/Conversation";
 import OtherUserComponent from "./components/otherUserComponent";
 import Navbar from "./components/navbar";
+import { AccessTokenContext } from "./Contexts/accessTokenContext";
+import AccessTokenProvider from "./Contexts/accessTokenContext";
+
 const rootElement = document.getElementById("root");
 render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<SpotifyApp />} />
-      <Route path="Forum" element={<Forum />} />
-      <Route path="LikedSongs" element={<LikedSongs />} />
-      <Route path="TopSongs" element={<TopSongs />} />
-      <Route path="TopArtists" element={<TopArtists />} />
-      <Route path="Inbox" element={<Inbox />} />
-      <Route path="UserProfile" element={<UserProfile />} />
+  <AccessTokenProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<SpotifyApp />} />
+        <Route path="Forum" element={<Forum />} />
+        <Route path="LikedSongs" element={<LikedSongs />} />
+        <Route path="TopSongs" element={<TopSongs />} />
+        <Route path="TopArtists" element={<TopArtists />} />
+        <Route path="Inbox" element={<Inbox />} />
+        <Route path="UserProfile" element={<UserProfile />} />
 
-      <Route path='Forum/indivForum' element={<IndivForum/>}/>
-      <Route path='Inbox/Conversation' element={<Conversation/>}/>
-      <Route path='OtherUserComponent' element={<OtherUserComponent />} />
-      <Route path='Forum/indivForum' element={<IndivForum />} />
-      <Route path="NavBar" element={<Navbar />} />
-    </Routes>
-  </BrowserRouter>,
+        <Route path='Forum/indivForum' element={<IndivForum />} />
+        <Route path='Inbox/Conversation' element={<Conversation />} />
+        <Route path='OtherUserComponent' element={<OtherUserComponent />} />
+        <Route path='Forum/indivForum' element={<IndivForum />} />
+        <Route path="NavBar" element={<Navbar />} />
+      </Routes>
+    </BrowserRouter>
+  </AccessTokenProvider>,
+
   rootElement
 );
 
