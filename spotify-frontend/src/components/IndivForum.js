@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Forum from './IndivForum.js'
 import { useLocation } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 function IndivForum() {
     const [forumPosts, setForumPosts]=useState([]);
@@ -13,7 +15,7 @@ function IndivForum() {
     const id=location.state?.id
     const creator=location.state?.creator
     const messageRef = useRef(null);
-    const postingUser=location.state?.currentUser
+    const user=location.state?.currentUser
 
 useEffect(() => {
    fetch("http://localhost:9000/forum/forumPosts?name=" + forumName)
@@ -24,11 +26,12 @@ useEffect(() => {
 
 const likePost = async (id) => {
     axios.put("http://localhost:9000/forum/likePost", {
-      id: id
+      id: id,
+      user: user
     })
     .then((res) => console.log(res.data))
     .catch((err) => console.log(err))
-    //window.location.reload(false);
+    window.location.reload(false);
   }
 
   const addPost = (e) => {
@@ -37,7 +40,7 @@ const likePost = async (id) => {
     axios.post("http://localhost:9000/forum/postedInForum", {
       forumName: forumName,
       Message: messageRef.current.value,
-      user: postingUser,
+      user: user,
       forumId: id
     })
 
@@ -52,11 +55,23 @@ const likePost = async (id) => {
     return new Date(seconds).toLocaleTimeString("en-US");
   }
 
+  const numLikes = (likeArray) => {
+      return likeArray.length;
+  }
+
+  const hasLiked = (likeArray) => {
+      for (let i=0; i<likeArray.length; i++) {
+          if(likeArray[i]===user) {
+              return true;
+          }
+      }
+      return false;
+  }
+
   return (
     <center>
     <div className="ForumPost">
-    {console.log(forumPosts)}
-    <Link to="/Forum">Forum</Link> 
+    <Link to="/Forum">Return to Forums</Link> 
         <header>
         <h1> {forumName} </h1>
         <h3> Created By: {creator} </h3>
@@ -72,12 +87,27 @@ const likePost = async (id) => {
         <br></br>
 
     {forumPosts && forumPosts.map((p) =>
-            <div>
+        <div style={
+            {
+             border: '2px solid black'
+            }
+          }>
+            <Grid> 
+             <Typography>
                 Posted By {p.poster} at {timeString(p.time.seconds)}:
                 <p>{p.message}</p>
-                <button type="submit" onClick={() => (likePost(p.id))}>Like</button> <br></br>
-                _________________________________
+
+                {hasLiked(p.likers)  &&
+                    <p>You have Liked This</p>
+                }
+                {!hasLiked(p.likers)  &&
+                    <button type="submit" onClick={() => (likePost(p.id))}>Like</button> 
+                }
+                <p>Likes: {numLikes(p.likers)}</p>
+                </Typography>
+            </Grid>
             </div>
+            
     )}
         
     </div>
@@ -86,20 +116,3 @@ const likePost = async (id) => {
 }
 
 export default IndivForum;
-
-/*
-, {
-      params: {
-        name: forumName
-      }
-  }
-
-
-  {forumPosts && forumPosts.map((p) => 
-            <div>
-                Posted By: {p.poster} at {p.time}: <br></br>
-                <h1>{p.message}</h1>
-                <button type="submit" onClick={() => (likePost(p.id))}>Like</button> <br></br>
-            </div>
-        )}
-*/

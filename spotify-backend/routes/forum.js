@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const db = require("./firebase")
 
-const {getDocs, collection, addDoc, deleteDoc, doc, updateDoc, query, where, Timestamp, increment} = require("firebase/firestore")
+const {getDocs, getDoc, collection, addDoc, deleteDoc, doc, updateDoc, query, where, Timestamp, increment} = require("firebase/firestore")
 
 router.get("/forums", async (req, res, next) => {
     const forumTitles=[]
@@ -56,6 +56,16 @@ router.post("/createForum", (req, res, next) => {
 
 router.put("/likePost", async (req, res, next) => { //need to figure out how to add to an array
     const id=req.body.id;
+    const postRef = doc(db, "forumPosts", id);
+    const docSnap = await getDoc(postRef);
+    const arr = docSnap.data().likers;
+    arr.push(req.body.user);
+
+    await updateDoc(postRef, {
+        likers: arr
+    });
+    res.send("Updated")
 })
+
 
 module.exports = router
