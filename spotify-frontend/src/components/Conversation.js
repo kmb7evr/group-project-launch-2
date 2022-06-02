@@ -56,8 +56,11 @@ function Conversation() {
         <center>
         <form onSubmit={sendMessage} >
                 <textarea type="text" ref={messageRef} rows="2" cols="50"
-                style={{borderRadius: '25px'}}/>
-                <input type="submit" value="Send Message" className="messageButton" style={buttonStyle}/>
+                style={{borderRadius: '25px'}}/> <br></br>
+                <Button type="submit"
+                    variant='outlined'
+                    sx={{ color: '#000000', borderColor: '#000000' }}>Send<br></br>
+                </Button>
         </form>
         <hr></hr>
         </center>

@@ -15,8 +15,8 @@ import { common } from '@mui/material/colors';
 
     const divStyleMessageSent = {
         display: 'flex',
-        alignItems: 'right',
-        justifyContent: 'right',
+        alignItems: 'left',
+        justifyContent: 'left',
         color: 'black',
         border: '1px solid rgba(0, 0, 0, 0.05)', 
         borderRadius: '25px',
@@ -27,7 +27,8 @@ import { common } from '@mui/material/colors';
         marginBottom: '5px',
         marginTop: '5px',
         position: 'relative',
-        left: "900px"
+        left: "900px",
+
     }
 
     const divStyleMessageRec = {
