@@ -82,6 +82,10 @@ function UserProfile() {
           <Navbar />
           <table>
           <tr>
+            <td>Spotify Username: </td>
+            <td>{user.spotifyUsername}</td>
+          </tr>
+          <tr>
             <td>Username: </td>
             <td>{username1}</td>
             <input ref={userRef1} placeholder={"Edit Username..."} />
