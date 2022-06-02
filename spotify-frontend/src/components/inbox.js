@@ -6,6 +6,9 @@ import Button from '@mui/material/Button';
 import Conversation from './Conversation.js'
 import { useLocation } from 'react-router-dom';
 
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+
 function Inbox() {
   const [convPart, setConvPart]=useState("");
   const location = useLocation();
@@ -13,17 +16,17 @@ function Inbox() {
   const newConversationRef = useRef(null);
   const [allUsers, setallUsers]=useState([]);
   const userName="testOther"
-
+  const [userNamesOnly, setuserNamesOnly]=useState([]);
 
 useEffect(() => {
+  fetch("http://localhost:9000/inbox/getUsers")
+  .then((res) => res.json())
+  .then((text) => setuserNamesOnly(text.result))
+  .catch((err) => console.log(err))
+
   fetch("http://localhost:9000/inbox/conversations?name=" + userName)
   .then((res) => res.json())
   .then((text) => setContactList(text.result))
-  .catch((err) => console.log(err))
-
-  fetch("http://localhost:9000/inbox/getUsers")
-  .then((res) => res.json())
-  .then((text) => setallUsers(text.result))
   .catch((err) => console.log(err))
 
 }, [])
@@ -33,18 +36,28 @@ const setPartner = (e) => {
   e.preventDefault();
   setConvPart(newConversationRef.current.value)
   newConversationRef.current.value=""
-  return false;
 }
+
     return ( //need to add datalist capabilities
       <div className="App">
           <h2> Inbox </h2>
           <Navbar /> <br></br>
           <form onSubmit={setPartner}> 
-            <input type="text" ref={newConversationRef}/> <br></br>
-            <input type="submit" value="Start Conversation"/>
+            <Autocomplete
+              disablePortal
+              options={userNamesOnly}
+              renderInput={(params) => <TextField
+                  sx={{
+                      width: '30vw'
+                  }}
+                  {...params}
+                  label="Users"
+                  inputRef={newConversationRef}
+              />}
+            />
+            <input type="submit" value="Start Conversation"/> <br></br>
           </form>
-
-          {console.log(convPart)}
+        
           {convPart!=="" && //may need to change that
             <Link to='Conversation' state={{contact: convPart, userName: userName}}>
               <Button
