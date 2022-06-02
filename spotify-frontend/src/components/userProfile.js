@@ -6,7 +6,7 @@ import axios from 'axios';
 function UserProfile() {
 
     const location = useLocation();
-    const user=location.state?.currUser
+    const user=location.state?.currUser;
     const [privacy, setPrivacy] = useState(user.isPublic)
     const [username1, setUsername1] = useState(user.username)
     const [firstName1, setFirstName1] = useState(user.firstName)
@@ -81,6 +81,10 @@ function UserProfile() {
           <h2> {user.username}'s Profile </h2>
           <Navbar />
           <table>
+          <tr>
+            <td>Spotify Username: </td>
+            <td>{user.spotifyUsername}</td>
+          </tr>
           <tr>
             <td>Username: </td>
             <td>{username1}</td>

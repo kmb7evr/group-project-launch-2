@@ -9,7 +9,6 @@ var fetch = require('node-fetch');
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log(req.query.token)
     const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=10'
     const data = await fetch(url, {
       headers: {
@@ -27,10 +26,9 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/artists', async (req, res, next) => {
+router.get('/trackYear', async (req, res, next) => {
   try {
-    console.log(req.query.token)
-    const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=10'
+    const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=50&time_range=medium_term'
     const data = await fetch(url, {
       headers: {
         'Authorization': 'Bearer ' + req.query.token
@@ -47,44 +45,106 @@ router.get('/artists', async (req, res, next) => {
   }
 })
 
-router.put("/put/songs", (req, res, next) => {
-  let id="";
 
-  const q = query(collection(db, "users"), where("spotifyUsername", "==", req.body.spotifyUsername));
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    id=doc.id;
-  });
+router.get('/trackAll', async (req, res, next) => {
+  try {
+    const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=50&time_range=long_term'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
 
-  console.log(req.body)
-  const usernameRef = doc(db, "users", id);
-  updateDoc(usernameRef, {
-    songs: req.body.songs
-  })
-  .then(res.send("Received"))
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
 })
 
-router.put("/put/artists", (req, res, next) => {
-  let id="";
+router.get('/trackMonth', async (req, res, next) => {
+  try {
+    const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=50&time_range=short_term'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
 
-  const q = query(collection(db, "users"), where("spotifyUsername", "==", req.body.spotifyUsername));
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    id=doc.id;
-  });
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
 
-  console.log(req.body)
-  const usernameRef = doc(db, "users", id);
-  updateDoc(usernameRef, {
-    artists: req.body.artists
-  })
-  .then(res.send("Received"))
+router.get('/artistYear', async (req, res, next) => {
+  try {
+    const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=50&time_range=medium_term'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
+
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
+
+
+router.get('/artistAll', async (req, res, next) => {
+  try {
+    const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=50&time_range=long_term'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
+
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
+
+router.get('/artistMonth', async (req, res, next) => {
+  try {
+    const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=50&time_range=short_term'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
+
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
 })
 
 
 router.get('/usernameget', async (req, res, next) => {
   try {
-    console.log(req.query.token)
     const url = 'https://api.spotify.com/v1/me/'
     const data = await fetch(url, {
       headers: {
@@ -149,6 +209,24 @@ router.put("/email", async (req, res, next) => {
   await updateDoc(postRef, {
     email: req.body.email
   });
+  res.send("Received")
+})
+
+router.post("/newuser", async (req, res, next) => {
+  const newUser = {
+      spotifyUsername: req.body.spotifyUsername,
+      username: req.body.username,
+      isPublic: req.body.isPublic,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      id: req.body.id
+  }
+  addDoc(collection(db, "users"), newUser)
+  .then((docRef) => {
+      console.log("posted")
+    })
+  .catch((e) => console.error(e))
   res.send("Received")
 })
 

@@ -1,9 +1,7 @@
 import Navbar from "./navbar";
-import axios from "axios"
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
-import Conversation from './Conversation.js'
 import { useLocation } from 'react-router-dom';
 
 import Autocomplete from '@mui/material/Autocomplete';
@@ -14,8 +12,7 @@ function Inbox() {
   const location = useLocation();
   const [contactList, setContactList]=useState([]);
   const newConversationRef = useRef(null);
-  const [allUsers, setallUsers]=useState([]);
-  const userName="testOther"
+  const userName="testUser" //need to change here DDDDDDD
   const [userNamesOnly, setuserNamesOnly]=useState([]);
 
 useEffect(() => {
@@ -55,7 +52,8 @@ const setPartner = (e) => {
                   inputRef={newConversationRef}
               />}
             />
-            <input type="submit" value="Start Conversation"/> <br></br>
+            <Button type="submit" value="Start Conversation">  Start Conversation</Button>
+            
           </form>
         
           {convPart!=="" && //may need to change that

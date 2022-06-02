@@ -95,7 +95,7 @@ router.get("/getUsers", async(req, res, next) => {
 
     const userNamesOnlyArr=[]
     for(let i=0; i<users.length; i++) {
-        userNamesOnlyArr.push(users[i].username)
+        userNamesOnlyArr.push(users[i].spotifyUsername)
     }
 
     //console.log(userNamesOnlyArr)
