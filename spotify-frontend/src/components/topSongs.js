@@ -100,7 +100,6 @@ function TopSongs(props) {
         </Box>
 
         <Box>
-          {console.log(yearSongs)}
           {yearSongs &&
             yearSongs.map((val, key) => {
               return (<Box>
@@ -145,8 +144,6 @@ function TopSongs(props) {
           }
         </Box>
         <Box>
-          {console.log(monthSongs)}
-
           {monthSongs &&
             monthSongs.map((val, key) => {
               return (<Box>

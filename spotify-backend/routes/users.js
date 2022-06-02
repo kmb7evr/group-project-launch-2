@@ -7,9 +7,9 @@ var fetch = require('node-fetch');
 
 
 
-router.get('/', async (req, res, next) => {
+router.get('/likedSongs', async (req, res, next) => {
   try {
-    const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=10'
+    const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50'
     const data = await fetch(url, {
       headers: {
         'Authorization': 'Bearer ' + req.query.token
@@ -214,19 +214,21 @@ router.put("/email", async (req, res, next) => {
 
 router.post("/newuser", async (req, res, next) => {
   const newUser = {
-      spotifyUsername: req.body.spotifyUsername,
-      username: req.body.username,
-      isPublic: req.body.isPublic,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      id: req.body.id
+    spotifyUsername: req.body.spotifyUsername,
+    username: req.body.username,
+    isPublic: req.body.isPublic,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    id: req.body.id
   }
+
   const docRef = await addDoc(collection(db, "users"), newUser)
   const postRef = doc(db, "users", docRef.id);
   await updateDoc(postRef, {
     id: docRef.id
   });
+
   res.send("Received")
 })
 

@@ -4,21 +4,20 @@ import { AccessTokenContext } from '../Contexts/accessTokenContext';
 import { useContext, useState } from 'react';
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 
 function LoginPage(props) {
-  const { accessToken } = useContext(AccessTokenContext);
-
-  const { setAccessToken } = useContext(AccessTokenContext);
-  const userRef = useRef();
-  const [isOnclick, setIsOnClick] = useState(true);
+  const { accessToken, allUsers, currentUser } = useContext(AccessTokenContext);
 
 
-  const loginFunction = (e) => {
-    if (isOnclick) {
-      onClick(e)
-    }
-  }
+
+  const { setAccessToken, setAllUsers, setCurrentUser } = useContext(AccessTokenContext);
+  const [currUsername, setCurrUsername] = useState();
+
+
+
   const navigate = useNavigate();
 
 
@@ -43,8 +42,45 @@ function LoginPage(props) {
         }
       })
     }
+    fetch("http://localhost:9000/users/data")
+      .then((res) => { return (res.json()); })
+      .then((text) => { setAllUsers(text.result) })
+      .catch((err) => console.log(err))
 
   }, [])
+
+  useEffect(() => {
+    fetch("http://localhost:9000/users/usernameget?token=" + accessToken).then(res => res.json())
+      .then(data => setCurrUsername(data.display_name))
+  }, []);
+
+  useEffect(() => {
+    if (allUsers && currUsername) {
+      let found = false;
+      for (let i = 0; i < allUsers.length; i++) {
+        if (allUsers[i].spotifyUsername == currUsername) {
+          setCurrentUser(allUsers[i])
+          console.log(currentUser);
+          found = true
+        }
+      }
+      if (!found) {
+        const newUser = {
+          spotifyUsername: currUsername,
+          username: currUsername,
+          isPublic: true,
+          firstName: "Not Yet Registered",
+          lastName: "Not Yet Registered",
+          email: "Not Yet Registered",
+          id: "Placeholder"
+        }
+        axios.post("http://localhost:9000/users/newuser", newUser)
+          .then((res) => console.log(res.data))
+          .catch((err) => console.log(err))
+        setCurrentUser(newUser)
+      }
+    }
+  }, [allUsers, currUsername]);
 
   return (
     <>

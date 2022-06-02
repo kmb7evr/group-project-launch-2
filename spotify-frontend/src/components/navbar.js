@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Navbar(props) {
-  const [accessToken, setAccessToken] = useState();
+
 
   const [userData, setUserData] = useState();
 
@@ -17,14 +17,7 @@ function Navbar(props) {
       .then((text) => { setUserData(text.result) })
       .catch((err) => console.log(err))
   }, []);
-  console.log("likedSOngs")
-  console.log(props.likedSongs)
-  console.log("topsongs")
-  console.log(props.topSongs)
-  console.log("yearsongs")
-  console.log(props.yearSongs)
-  console.log("monthsongs")
-  console.log(props.monthSongs)
+
   return (
     <div className="App">
       <Link to="/" state={{ accessToken: props.accessToken }}>Home</Link> |{" "}
