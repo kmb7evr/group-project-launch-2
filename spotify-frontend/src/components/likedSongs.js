@@ -1,13 +1,13 @@
 import Navbar from "./navbar";
-import { useLocation } from "react-router";
 import { useState, useEffect, useContext } from "react";
+import { Box, Card, CardMedia, Typography, CardContent } from '@mui/material/';
 import { AccessTokenContext } from "../Contexts/accessTokenContext";
 
 
 function LikedSongs() {
   const { accessToken } = useContext(AccessTokenContext);
 
-  const [songs, setLikedSongs] = useState([]);
+  const [songs, setLikedSongs] = useState();
 
 
 
@@ -15,11 +15,12 @@ function LikedSongs() {
 
 
   useEffect(() => {
+    console.log(accessToken)
     fetch("http://localhost:9000/users/likedSongs?token=" + accessToken).then(res => res.json())
       .then(data => setLikedSongs(data.items))
-    console.log(songs)
 
   }, []);
+
   return (
     <div className="App">
       <h2> Liked Songs </h2>
@@ -30,9 +31,48 @@ function LikedSongs() {
       // monthSongs={monthSongs}
       // accessToken={accessToken}
       />
+
+
       {songs &&
         songs.map((val, key) => {
-          return <p>{val.track.name} by {val.track.artists[0].name}</p>
+          return (<Box sx={{ display: "flex", justifyContent: 'center' }}>
+            <Card sx={{
+              display: 'flex',
+              minWidth: 400,
+              maxWidth: 400,
+              justifyContent: 'right',
+              m: 2
+
+
+            }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'left', flexGrow: 1 }}>
+                <CardContent sx={{
+                  flex: '1 0 auto',
+                }}>
+                  <Typography component="div" variant="h5">
+                    {val.track.name}
+                  </Typography>
+                  <Typography variant="subtitle1" color="text.secondary" component="div">
+                    {val.track.artists[0].name}
+                  </Typography>
+                </CardContent>
+              </Box>
+              <CardMedia
+                component="img"
+                sx={{
+                  width: 200,
+                  pl: 1
+                }}
+                image={val.track.album.images[0].url}
+                alt={"album cover for" + val.track.album.name}
+              />
+            </Card>
+
+
+          </Box >)
+
+
+
         })
       }
     </div>

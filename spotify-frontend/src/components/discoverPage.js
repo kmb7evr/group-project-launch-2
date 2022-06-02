@@ -62,10 +62,7 @@ function DiscoverPage(props) {
       </tr>
     );
   }
-  console.log("likedSOngs")
-  console.log(likedSongs)
-  console.log("topsongs")
-  console.log(topsongs)
+
   return (
     <div className="App">
       <h3> Welcome to this Discover Page! </h3>
@@ -78,7 +75,7 @@ function DiscoverPage(props) {
       // topSongsM={topsongsM}
       // likedSongs={likedSongs}
       />
-      <Button  variant="contained">
+      <Button variant="contained">
         Log Out
       </Button>
       <table>
