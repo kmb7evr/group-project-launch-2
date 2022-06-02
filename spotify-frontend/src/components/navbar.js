@@ -4,8 +4,9 @@ import React, { useRef } from 'react'
 import { AccessTokenContext } from '../Contexts/accessTokenContext';
 import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-function Navbar(props) {
+import axios from 'axios';
 
+function Navbar(props) {
   const [accessToken, setAccessToken] = useState();
   // const [topsongs, setTopSongs] = useState([]);
   // const [topsongsY, setTopSongsY] = useState([]);
@@ -23,15 +24,6 @@ function Navbar(props) {
     //   .then(data => console.log(data.items))
   }, []);
 
-  let user = null;
-  if (userData) {
-    for (let i = 0; i < userData.length; i++) {
-      if (userData[i].username == 'katie') {
-        user = userData[i]
-      }
-    }
-  }
-
 
   return (
     <div className="App">
@@ -41,8 +33,6 @@ function Navbar(props) {
       <Link to="/TopSongs" state={{ accessToken: props.accessToken, songs: props.topSongs, yearSongs: props.topSongsY, monthSongs: props.topSongsM }}>Top Songs</Link> |{" "}
       <Link to="/TopArtists" state={{ accessToken: props.accessToken }}>Top Artists</Link> |{" "}
       <Link to="/Inbox" state={{ accessToken: props.accessToken }}>Inbox</Link> |{" "}
-      <Link to="/UserProfile" state={{ currUser: user, accessToken: props.accessToken }} >User Profile</Link> {" "}
-
     </div>
   );
 }
