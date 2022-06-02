@@ -3,19 +3,13 @@ import { useLocation } from "react-router";
 import { useState, useEffect, useContext } from "react";
 import { Box, Card, CardMedia, Typography, CardContent } from '@mui/material/';
 import { AccessTokenContext } from "../Contexts/accessTokenContext";
-// import AccessTokenProvider from "./Contexts/accessTokenContext";
 
 
 function TopSongs(props) {
   const [songs, setTopSongs] = useState([]);
   const [yearSongs, setTopSongsY] = useState([]);
   const [monthSongs, setTopSongsM] = useState([]);
-  // const location = useLocation();
-  // const songs = location.state?.topSongs;
-  // const yearSongs = location.state?.yearSongs;
-  // const monthSongs = location.state?.monthSongs;
-  // const likedSongs = location.state?.likedSongs;
-  // const accessToken = location.state?.accessToken;
+
   const { accessToken } = useContext(AccessTokenContext);
   useEffect(() => {
     fetch("http://localhost:9000/users/trackAll?token=" + accessToken).then(res => res.json())
@@ -32,12 +26,6 @@ function TopSongs(props) {
   return (
     <div className="App">
       <Navbar
-      // likedSongs={likedSongs}
-      // topSongs={songs}
-      // yearSongs={yearSongs}
-      // monthSongs={monthSongs}
-      // accessToken={accessToken}
-
       />
       <h1>Top Songs</h1>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
