@@ -6,7 +6,7 @@ import axios from 'axios';
 function UserProfile() {
 
     const location = useLocation();
-    const user=location.state?.currUser
+    const user=location.state?.currUser;
     const [privacy, setPrivacy] = useState(user.isPublic)
     const [username1, setUsername1] = useState(user.username)
     const [firstName1, setFirstName1] = useState(user.firstName)
