@@ -4,18 +4,11 @@ import { useState, useEffect } from "react";
 import { Box, Card, CardMedia, Typography, CardContent } from '@mui/material/';
 
 
-function TopSongs() {
+function TopSongs(props) {
   const location = useLocation();
-
   const songs = location.state?.songs;
   const yearSongs = location.state?.yearSongs;
   const monthSongs = location.state?.monthSongs;
-
-
-
-
-
-
 
   return (
     <div className="App">
