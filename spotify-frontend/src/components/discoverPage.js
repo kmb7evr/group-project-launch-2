@@ -1,5 +1,4 @@
 import React from 'react'
-import { AccessTokenContext } from '../Contexts/accessTokenContext';
 import { Button, Typography, Box } from '@mui/material';
 import Navbar from "./navbar";
 import { useState, useEffect, useContext } from 'react';
@@ -20,10 +19,29 @@ function DiscoverPage(props) {
       .then((res) => { return (res.json()); })
       .then((text) => { setUserData(text.result) })
       .catch((err) => console.log(err))
+
+
+
     fetch("http://localhost:9000/users/usernameget?token=" + props.accessToken).then(res => res.json())
       .then(data => setCurrUsername(data.display_name))
     fetch("http://localhost:9000/users/trackAll?token=" + props.accessToken).then(res => res.json())
       .then(data => setTopSongs(data.items))
+
+
+
+
+
+    fetch("http://localhost:9000/users?token=" + props.accessToken).then(res => res.json())
+      .then(data => setLikedSongs(data.items))
+  }, []);
+
+
+
+  useEffect(() => {
+
+
+
+
     fetch("http://localhost:9000/users/trackYear?token=" + props.accessToken).then(res => res.json())
       .then(data => setTopSongsY(data.items))
     fetch("http://localhost:9000/users/trackMonth?token=" + props.accessToken).then(res => res.json())
@@ -35,7 +53,7 @@ function DiscoverPage(props) {
   useEffect(() => {
     if (userData && currUsername) {
       let found = false;
-      for(let i = 0; i < userData.length; i++) {
+      for (let i = 0; i < userData.length; i++) {
         if (userData[i].spotifyUsername == currUsername) {
           setUser(userData[i])
           found = true
@@ -50,13 +68,13 @@ function DiscoverPage(props) {
           lastName: "Not Yet Registered",
           email: "Not Yet Registered",
           id: "Placeholder"
-          }
-        axios.post("http://localhost:9000/users/newuser", newUser)
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err))
-        setUser(newUser)
         }
+        axios.post("http://localhost:9000/users/newuser", newUser)
+          .then((res) => console.log(res.data))
+          .catch((err) => console.log(err))
+        setUser(newUser)
       }
+    }
   }, [userData, currUsername]);
 
   const tableCell = (element) => {
@@ -67,12 +85,17 @@ function DiscoverPage(props) {
       </tr>
     );
   }
+  console.log("likedSOngs")
+  console.log(likedSongs)
+  console.log("topsongs")
+  console.log(topsongs)
   return (
     <div className="App">
       <h3> Welcome to this Discover Page! </h3>
       <h5> {"Currently logged in as: " + currUsername} </h5>
       <Navbar
         accessToken={props.accessToken}
+        currUser={user}
         topSongs={topsongs}
         topSongsY={topsongsY}
         topSongsM={topsongsM}

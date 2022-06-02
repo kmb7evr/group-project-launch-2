@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import IndivForum from "./IndivForum.js";
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { border } from "@mui/system";
 import {buttonStyle, divStyleMessageSent, divStyleMessageRec} from './pagecss.js';
 
@@ -16,17 +16,17 @@ import {buttonStyle, divStyleMessageSent, divStyleMessageRec} from './pagecss.js
 
 function Conversation() {
     const location = useLocation();
-    const contact=location.state?.contact
-    const userName=location.state?.userName
+    const contact = location.state?.contact
+    const userName = location.state?.userName
     const messageRef = useRef(null);
-    const [conversation, setConversation]=useState()
+    const [conversation, setConversation] = useState()
 
     useEffect(() => {
         fetch("http://localhost:9000/inbox/indivConversation?name=" + userName + "?" + contact)
-        .then((res) => res.json())
-        .then((text) => setConversation(text.result))
-        .catch((err) => console.log(err))
-      }, [])
+            .then((res) => res.json())
+            .then((text) => setConversation(text.result))
+            .catch((err) => console.log(err))
+    }, [])
 
 
     const sendMessage = (e) => {
@@ -38,16 +38,16 @@ function Conversation() {
             Message: messageRef.current.value
         })
 
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err))
+            .then((res) => console.log(res.data))
+            .catch((err) => console.log(err))
 
-        messageRef.current.value=""
+        messageRef.current.value = ""
         window.location.reload(false);
     }
-    
-  return (
-    <div className="IndivConversation">
-        <div style={{
+
+    return (
+        <div className="IndivConversation">
+           <div style={{
 
         margin: "20px"}}>
             <Link to="/Inbox">Return to Inbox</Link> 

@@ -8,8 +8,6 @@ import axios from 'axios';
 
 function Navbar(props) {
   const [accessToken, setAccessToken] = useState();
-  // const [topsongs, setTopSongs] = useState([]);
-  // const [topsongsY, setTopSongsY] = useState([]);
 
   const [userData, setUserData] = useState();
 
@@ -18,21 +16,24 @@ function Navbar(props) {
       .then((res) => { return (res.json()); })
       .then((text) => { setUserData(text.result) })
       .catch((err) => console.log(err))
-    // fetch("http://localhost:9000/users/trackAll?token=" + props.accessToken).then(res => res.json())
-    //   .then(data => setTopSongs(data.items))
-    // fetch("http://localhost:9000/users/trackYear?token=" + props.accessToken).then(res => res.json())
-    //   .then(data => console.log(data.items))
   }, []);
-
-
+  console.log("likedSOngs")
+  console.log(props.likedSongs)
+  console.log("topsongs")
+  console.log(props.topSongs)
+  console.log("yearsongs")
+  console.log(props.yearSongs)
+  console.log("monthsongs")
+  console.log(props.monthSongs)
   return (
     <div className="App">
       <Link to="/" state={{ accessToken: props.accessToken }}>Home</Link> |{" "}
       <Link to="/Forum" state={{ accessToken: props.accessToken }}>Forum</Link> |{" "}
-      <Link to="/LikedSongs" state={{ accessToken: props.accessToken, songs: props.likedSongs }}>Liked Songs</Link> |{" "}
-      <Link to="/TopSongs" state={{ accessToken: props.accessToken, songs: props.topSongs, yearSongs: props.topSongsY, monthSongs: props.topSongsM }}>Top Songs</Link> |{" "}
+      <Link to="/LikedSongs" state={{ accessToken: props.accessToken, topSongs: props.topSongs, yearSongs: props.topSongsY, monthSongs: props.topSongsM, likedSongs: props.likedSongs }}>Liked Songs</Link> |{" "}
+      <Link to="/TopSongs" state={{ accessToken: props.accessToken, topSongs: props.topSongs, yearSongs: props.topSongsY, monthSongs: props.topSongsM, likedSongs: props.likedSongs }}>Top Songs</Link> |{" "}
       <Link to="/TopArtists" state={{ accessToken: props.accessToken }}>Top Artists</Link> |{" "}
       <Link to="/Inbox" state={{ accessToken: props.accessToken }}>Inbox</Link> {" "}
+      <Link to="/UserProfile" state={{ currUser: props.currUser, accessToken: props.accessToken }}>User Profile</Link> |{" "}
     </div>
   );
 }
