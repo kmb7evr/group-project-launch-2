@@ -5,8 +5,11 @@ import { useContext, useState } from 'react';
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
+
 function LoginPage(props) {
-  const { setAccessToken } = props;
+  const { accessToken } = useContext(AccessTokenContext);
+
+  const { setAccessToken } = useContext(AccessTokenContext);
   const userRef = useRef();
   const [isOnclick, setIsOnClick] = useState(true);
 
@@ -37,7 +40,7 @@ function LoginPage(props) {
       fetch('http://localhost:9000/auth/callback?code=' + code).then(res => res.json()).then(data => {
         if (data.token) {
           setAccessToken(data.token);
-        } 
+        }
       })
     }
 
@@ -45,7 +48,7 @@ function LoginPage(props) {
 
   return (
     <>
-      <br/>
+      <br />
       <Box display='flex' flexDirection='column'>
         <Button onClick={(e) => onClick(e)} variant="contained">Log Into Spotify</Button>
       </Box>
