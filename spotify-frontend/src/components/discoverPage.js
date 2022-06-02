@@ -24,30 +24,8 @@ function DiscoverPage(props) {
 
     fetch("http://localhost:9000/users/usernameget?token=" + props.accessToken).then(res => res.json())
       .then(data => setCurrUsername(data.display_name))
-    fetch("http://localhost:9000/users/trackAll?token=" + props.accessToken).then(res => res.json())
-      .then(data => setTopSongs(data.items))
-
-
-
-
-
-    fetch("http://localhost:9000/users?token=" + props.accessToken).then(res => res.json())
-      .then(data => setLikedSongs(data.items))
   }, []);
 
-
-
-  useEffect(() => {
-
-
-
-
-    fetch("http://localhost:9000/users/trackYear?token=" + props.accessToken).then(res => res.json())
-      .then(data => setTopSongsY(data.items))
-    fetch("http://localhost:9000/users/trackMonth?token=" + props.accessToken).then(res => res.json())
-      .then(data => setTopSongsM(data.items))
-
-  }, []);
   useEffect(() => {
     if (userData && currUsername) {
       let found = false;
@@ -92,12 +70,12 @@ function DiscoverPage(props) {
       <h3> Welcome to this Discover Page! </h3>
       <h5> {"Currently logged in as: " + currUsername} </h5>
       <Navbar
-        accessToken={props.accessToken}
-        currUser={user}
-        topSongs={topsongs}
-        topSongsY={topsongsY}
-        topSongsM={topsongsM}
-        likedSongs={likedSongs}
+      // accessToken={props.accessToken}
+      // currUser={user}
+      // topSongs={topsongs}
+      // topSongsY={topsongsY}
+      // topSongsM={topsongsM}
+      // likedSongs={likedSongs}
       />
       <table>
         {userData && userData.map((user) => user.isPublic && tableCell(user))}

@@ -4,9 +4,16 @@ const AccessTokenContext = createContext('');
 
 function AccessTokenProvider({ children }) {
   const [accessToken, setAccessToken] = useState('');
+  const [allUsers, setAllUsers] = useState();
+  const [currentUser, setCurrentUser] = useState();
+
   const obj = {
     accessToken: accessToken,
-    setAccessToken: setAccessToken
+    setAccessToken: setAccessToken,
+    allUsers: allUsers,
+    setAllUsers: setAllUsers,
+    currentUser: currentUser,
+    setCurrentUser: setCurrentUser
   }
   // console.log(obj)
   return (
