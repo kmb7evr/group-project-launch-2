@@ -19,26 +19,32 @@ function DiscoverPage(props) {
       .then((text) => { setUserData(text.result) })
       .catch((err) => console.log(err))
 
+    //TODO: need a user post request first before adding songs and artists
+
     getTopSongs()
-    .then(()=>{postSongs()});//if there's a mistake, it's probably here
+    .then(()=>{putSongs()});//if there's a mistake, it's probably here
     
     getTopArtists()
-    .then(()=>{postArtists()});//if there's a mistake, it's probably here
+    .then(()=>{putArtists()});//if there's a mistake, it's probably here
 
   }, []);
 
-  const postSongs = () => {
-    axios.post("http://localhost:9000/users/post/songs", {
-      songs: songs
+
+  
+  const putSongs = () => {
+    axios.put("http://localhost:9000/users/post/songs", {
+      songs: songs,
+      spotifyUsername: "Liam McColley"//TODO: must change this to spotifyUsername
     })
     .then((res) => console.log(res.data))
     .catch((err) => console.log(err))
  
   }
 
-  const postArtists = () => {
-    axios.post("http://localhost:9000/users/post/songs", {
-      artists: artists 
+  const putArtists = () => {
+    axios.put("http://localhost:9000/users/post/artists", {
+      artists: artists, 
+      spotifyUsername: "Liam McColley"//TODO: must change this to spotifyUsername
     })
     .then((res) => console.log(res.data))
     .catch((err) => console.log(err))
