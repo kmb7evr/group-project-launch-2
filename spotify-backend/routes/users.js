@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const db = require("./firebase")
 
-const { getDocs, doc, collection, addDoc, updateDoc } = require("firebase/firestore")
+const { getDocs, doc, collection, addDoc, updateDoc, query} = require("firebase/firestore")
 var fetch = require('node-fetch');
 
 
@@ -47,10 +47,38 @@ router.get('/artists', async (req, res, next) => {
   }
 })
 
-router.post("/post/songs", (req, res, next) => {
+router.put("/put/songs", (req, res, next) => {
+  let id="";
+
+  const q = query(collection(db, "users"), where("spotifyUsername", "==", req.body.spotifyUsername));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    id=doc.id;
+  });
+
   console.log(req.body)
-  const docRef =addDoc(collection(db, "users"), req.body)
-  .then(res.send("Received"));
+  const usernameRef = doc(db, "users", id);
+  updateDoc(usernameRef, {
+    songs: req.body.songs
+  })
+  .then(res.send("Received"))
+})
+
+router.put("/put/artists", (req, res, next) => {
+  let id="";
+
+  const q = query(collection(db, "users"), where("spotifyUsername", "==", req.body.spotifyUsername));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    id=doc.id;
+  });
+
+  console.log(req.body)
+  const usernameRef = doc(db, "users", id);
+  updateDoc(usernameRef, {
+    artists: req.body.artists
+  })
+  .then(res.send("Received"))
 })
 
 
