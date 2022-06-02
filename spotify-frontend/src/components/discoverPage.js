@@ -15,7 +15,8 @@ function DiscoverPage(props) {
   const [likedSongs, setLikedSongs] = useState([]);
 
 
-  const { accessToken } = useContext(AccessTokenContext);
+  // const { accessToken } = useContext(AccessTokenContext);
+  console.log("accessToken1", props.accessToken);
   useEffect(() => {
     fetch("http://localhost:9000/users/data")
       .then((res) => { return (res.json()); })
@@ -27,7 +28,7 @@ function DiscoverPage(props) {
       .then(data => setTopSongsY(data.items))
     fetch("http://localhost:9000/users/trackMonth?token=" + props.accessToken).then(res => res.json())
       .then(data => setTopSongsM(data.items))
-    fetch("http://localhost:9000/users?token=" + accessToken).then(res => res.json())
+    fetch("http://localhost:9000/users?token=" + props.accessToken).then(res => res.json())
       .then(data => setLikedSongs(data.items))
   }, []);
 
