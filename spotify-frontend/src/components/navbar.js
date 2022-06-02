@@ -8,8 +8,6 @@ import axios from 'axios';
 
 function Navbar(props) {
   const [accessToken, setAccessToken] = useState();
-  // const [topsongs, setTopSongs] = useState([]);
-  // const [topsongsY, setTopSongsY] = useState([]);
 
   const [userData, setUserData] = useState();
 
@@ -18,10 +16,6 @@ function Navbar(props) {
       .then((res) => { return (res.json()); })
       .then((text) => { setUserData(text.result) })
       .catch((err) => console.log(err))
-    // fetch("http://localhost:9000/users/trackAll?token=" + props.accessToken).then(res => res.json())
-    //   .then(data => setTopSongs(data.items))
-    // fetch("http://localhost:9000/users/trackYear?token=" + props.accessToken).then(res => res.json())
-    //   .then(data => console.log(data.items))
   }, []);
 
 
@@ -33,6 +27,7 @@ function Navbar(props) {
       <Link to="/TopSongs" state={{ accessToken: props.accessToken, songs: props.topSongs, yearSongs: props.topSongsY, monthSongs: props.topSongsM }}>Top Songs</Link> |{" "}
       <Link to="/TopArtists" state={{ accessToken: props.accessToken }}>Top Artists</Link> |{" "}
       <Link to="/Inbox" state={{ accessToken: props.accessToken }}>Inbox</Link> |{" "}
+      <Link to="/UserProfile" state={{ currUser: props.currUser, accessToken:props.accessToken }}>User Profile</Link> |{" "}
     </div>
   );
 }

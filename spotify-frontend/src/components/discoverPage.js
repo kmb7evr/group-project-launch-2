@@ -1,5 +1,4 @@
 import React from 'react'
-import { AccessTokenContext } from '../Contexts/accessTokenContext';
 import { Button, Typography, Box } from '@mui/material';
 import Navbar from "./navbar";
 import { useState, useEffect, useContext } from 'react';
@@ -73,14 +72,12 @@ function DiscoverPage(props) {
       <h5> {"Currently logged in as: " + currUsername} </h5>
       <Navbar
         accessToken={props.accessToken}
+        currUser={user}
         topSongs={topsongs}
         topSongsY={topsongsY}
         topSongsM={topsongsM}
         likedSongs={likedSongs}
       />
-      <Button onClick={logout} variant="contained">
-        Log Out
-      </Button>
       <table>
         {userData && userData.map((user) => user.isPublic && tableCell(user))}
       </table>
