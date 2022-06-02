@@ -4,10 +4,13 @@ import { Button, Typography, Box } from '@mui/material';
 import Navbar from "./navbar";
 import { useState, useEffect, useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import axios from "axios";
 
 function DiscoverPage(props) {
   const { user, logout } = props;
   const [userData, setUserData] = useState();
+  const [songs, setSongs]=useState();
+  const [artists, setArtists]=useState();
 
   const { accessToken } = useContext(AccessTokenContext);
   useEffect(() => {
@@ -15,7 +18,45 @@ function DiscoverPage(props) {
       .then((res) => { return (res.json()); })
       .then((text) => { setUserData(text.result) })
       .catch((err) => console.log(err))
+
+    getTopSongs()
+    .then(()=>{postSongs()});
+    
+    getTopArtists()
+    .then(()=>{postArtists()});
+
   }, []);
+
+  const postSongs = () => {
+    axios.post("http://localhost:9000/users/post/songs", {
+      songs: songs
+    })
+    .then((res) => console.log(res.data))
+    .catch((err) => console.log(err))
+ 
+  }
+
+  const postArtists = () => {
+    axios.post("http://localhost:9000/users/post/songs", {
+      artists: artists 
+    })
+    .then((res) => console.log(res.data))
+    .catch((err) => console.log(err))
+ 
+  }
+
+
+  const getTopSongs=()=>{
+    fetch("http://localhost:9000/users?token=" + accessToken).then(res => res.json())
+      .then(data => setSongs(data.items))
+      .catch((err)=>console.log(err));
+  }
+
+  const getTopArtists=()=>{
+    fetch("http://localhost:9000/users/artists?token=" + accessToken).then(res => res.json())
+      .then(data => setArtists(data.items))
+      .catch((err)=>console.log(err));
+  }
 
   const tableCell = (element) => {
     return (
