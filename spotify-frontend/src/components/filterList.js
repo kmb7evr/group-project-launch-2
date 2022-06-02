@@ -25,7 +25,7 @@ function FilterList(props) {
           {filteredData.map((f, index) => (
             <ol key={f.id}>
                 <Grid item xs>
-                    <Link to='IndivForum' state={{ id: f.id, name: f.forumName, creator: f.creator, currentUser: "testUser"}}>
+                    <Link to='IndivForum' state={{ id: f.id, name: f.forumName, creator: f.creator, currentUser: props.user}}>
                         <Button
                             variant='outlined'
                             sx={{ color: '#000000', borderColor: '#000000' }}>{f.forumName} <br></br>
