@@ -7,6 +7,7 @@ import Forum from './IndivForum.js'
 import { useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import {buttonStyle} from './pagecss.js';
 
 function IndivForum() {
     const [forumPosts, setForumPosts]=useState([]);
@@ -81,30 +82,19 @@ const likePost = async (id) => {
           <p>{creator}</p>
         </header>
         <center>
-        <form onSubmit={addPost} >
-         <h1> New Post </h1>
-         <textarea type="text" ref={messageRef} rows="2" cols="50"
-                style={{borderRadius: '25px'}}/>
-                <input type="submit" value="Post" style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'blue',
-                    border: '1px solid rgba(0, 0, 0, 0.05)', 
-                    height: "50px",
-                    width: "200px",
-                    fontSize: '20px',
-                    borderRadius: '10px',
-                    padding: '20px',
-                  }}/>
-        </form>
+          <form onSubmit={addPost} >
+          <h1> New Post </h1>
+          <textarea type="text" ref={messageRef} rows="2" cols="50"
+                  style={{borderRadius: '25px'}}/>
+                  <input type="submit" value="Post" style={buttonStyle}/>
+          </form>
         </center>
         <hr></hr>
         <br></br>
         <br></br>
         <br></br>
 
-                  <center>
+    <center>
     {forumPosts && forumPosts.map((p) =>
         <div style={
             {

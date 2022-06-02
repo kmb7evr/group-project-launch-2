@@ -46,8 +46,10 @@ function DiscoverPage(props) {
       .then(data => setTopSongsY(data.items))
     fetch("http://localhost:9000/users/trackMonth?token=" + props.accessToken).then(res => res.json())
       .then(data => setTopSongsM(data.items))
-
+    //fetch("http://localhost:9000/users?token=" + accessToken).then(res => res.json())
+      //.then(data => setLikedSongs(data.items))
   }, []);
+
   useEffect(() => {
     if (userData && currUsername) {
       let found = false;
@@ -99,6 +101,9 @@ function DiscoverPage(props) {
         topSongsM={topsongsM}
         likedSongs={likedSongs}
       />
+      <Button  variant="contained">
+        Log Out
+      </Button>
       <table>
         {userData && userData.map((user) => user.isPublic && tableCell(user))}
       </table>
