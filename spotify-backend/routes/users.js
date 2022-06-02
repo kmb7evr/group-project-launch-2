@@ -222,11 +222,11 @@ router.post("/newuser", async (req, res, next) => {
       email: req.body.email,
       id: req.body.id
   }
-  addDoc(collection(db, "users"), newUser)
-  .then((docRef) => {
-      console.log("posted")
-    })
-  .catch((e) => console.error(e))
+  const docRef = await addDoc(collection(db, "users"), newUser)
+  const postRef = doc(db, "users", docRef.id);
+  await updateDoc(postRef, {
+    id: docRef.id
+  });
   res.send("Received")
 })
 
