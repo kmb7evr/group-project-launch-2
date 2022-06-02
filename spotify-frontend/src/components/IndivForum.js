@@ -35,6 +35,7 @@ const likePost = async (id) => {
   }
 
   const addPost = (e) => {
+    console.log(user)
     e.preventDefault();  // no reloading the page
     var current = new Date();
     axios.post("http://localhost:9000/forum/postedInForum", {
@@ -69,23 +70,41 @@ const likePost = async (id) => {
   }
 
   return (
-    <center>
     <div className="ForumPost">
-    <Link to="/Forum">Return to Forums</Link> 
-        <header>
-        <h1> {forumName} </h1>
-        <h3> Created By: {creator} </h3>
+    <Link to="/Forum" style={{
+      margin: "20px"}}>Return to Forums</Link> 
+
+        <header style={{
+            margin: "20px"}}>
+          <h1> {forumName} </h1>
+          <div> <h3>Creator</h3></div>
+          <p>{creator}</p>
         </header>
+        <center>
         <form onSubmit={addPost} >
-         <h1> New Post:  </h1>
-          <textarea type="text" ref={messageRef} rows="4" cols="50"/> <br></br><br></br>
-          <input type="submit" value="post"/>
+         <h1> New Post </h1>
+         <textarea type="text" ref={messageRef} rows="2" cols="50"
+                style={{borderRadius: '25px'}}/>
+                <input type="submit" value="Post" style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'blue',
+                    border: '1px solid rgba(0, 0, 0, 0.05)', 
+                    height: "50px",
+                    width: "200px",
+                    fontSize: '20px',
+                    borderRadius: '10px',
+                    padding: '20px',
+                  }}/>
         </form>
-        _________________________________
+        </center>
+        <hr></hr>
         <br></br>
         <br></br>
         <br></br>
 
+                  <center>
     {forumPosts && forumPosts.map((p) =>
         <div style={
             {
@@ -109,9 +128,9 @@ const likePost = async (id) => {
             </div>
             
     )}
+        </center>
         
     </div>
-    </center>
   );
 }
 
