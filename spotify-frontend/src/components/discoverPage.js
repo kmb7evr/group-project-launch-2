@@ -9,12 +9,26 @@ function DiscoverPage(props) {
   const { user, logout } = props;
   const [userData, setUserData] = useState();
 
+  const [topsongs, setTopSongs] = useState([]);
+  const [topsongsY, setTopSongsY] = useState([]);
+  const [topsongsM, setTopSongsM] = useState([]);
+  const [likedSongs, setLikedSongs] = useState([]);
+
+
   const { accessToken } = useContext(AccessTokenContext);
   useEffect(() => {
     fetch("http://localhost:9000/users/data")
       .then((res) => { return (res.json()); })
       .then((text) => { setUserData(text.result) })
       .catch((err) => console.log(err))
+    fetch("http://localhost:9000/users/trackAll?token=" + props.accessToken).then(res => res.json())
+      .then(data => setTopSongs(data.items))
+    fetch("http://localhost:9000/users/trackYear?token=" + props.accessToken).then(res => res.json())
+      .then(data => setTopSongsY(data.items))
+    fetch("http://localhost:9000/users/trackMonth?token=" + props.accessToken).then(res => res.json())
+      .then(data => setTopSongsM(data.items))
+    fetch("http://localhost:9000/users?token=" + accessToken).then(res => res.json())
+      .then(data => setLikedSongs(data.items))
   }, []);
 
   const tableCell = (element) => {
@@ -31,7 +45,13 @@ function DiscoverPage(props) {
     <div className="App">
       <h3> Welcome to this Discover Page! </h3>
       <h5> {"Currently logged in as: " + user} </h5>
-      <Navbar accessToken={props.accessToken} />
+      <Navbar
+        accessToken={props.accessToken}
+        topSongs={topsongs}
+        topSongsY={topsongsY}
+        topSongsM={topsongsM}
+        likedSongs={likedSongs}
+      />
       <Button onClick={logout} variant="contained">
         Log Out
       </Button>

@@ -10,7 +10,7 @@ var fetch = require('node-fetch');
 router.get('/', async (req, res, next) => {
   try {
     console.log(req.query.token)
-    const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=10'
+    const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50'
     const data = await fetch(url, {
       headers: {
         'Authorization': 'Bearer ' + req.query.token
@@ -27,9 +27,125 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/trackYear', async (req, res, next) => {
+  try {
+    const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=50&time_range=medium_term'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
+
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
+
+
+router.get('/trackAll', async (req, res, next) => {
+  try {
+    const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=50&time_range=long_term'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
+
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
+
+router.get('/trackMonth', async (req, res, next) => {
+  try {
+    const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=50&time_range=short_term'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
+
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
+
+router.get('/artistYear', async (req, res, next) => {
+  try {
+    const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=50&time_range=medium_term'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
+
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
+
+
+router.get('/artistAll', async (req, res, next) => {
+  try {
+    const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=50&time_range=long_term'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
+
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
+
+router.get('/artistMonth', async (req, res, next) => {
+  try {
+    const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=50&time_range=short_term'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
+
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
+
+
 router.get('/usernameget', async (req, res, next) => {
   try {
-    console.log(req.query.token)
     const url = 'https://api.spotify.com/v1/me/'
     const data = await fetch(url, {
       headers: {
