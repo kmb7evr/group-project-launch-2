@@ -27,6 +27,7 @@ function UserProfile() {
       .catch((err) => console.log(err))
     userRef1.current.value = "";
     setUsername1(val)
+    currentUser.username = val
   }
 
   const updateFirstName = async (userID) => {
@@ -39,6 +40,7 @@ function UserProfile() {
       .catch((err) => console.log(err))
     userRef2.current.value = "";
     setFirstName1(val)
+    currentUser.firstName = val
   }
 
   const updateLastName = async (userID) => {
@@ -51,6 +53,7 @@ function UserProfile() {
       .catch((err) => console.log(err))
     userRef3.current.value = "";
     setLastName1(val)
+    currentUser.lastName = val
   }
 
   const updateEmail = async (userID) => {
@@ -63,6 +66,7 @@ function UserProfile() {
       .catch((err) => console.log(err))
     userRef4.current.value = "";
     setEmail1(val)
+    currentUser.email = val
   }
 
   const switchPrivacy = async (userID) => {
@@ -74,6 +78,7 @@ function UserProfile() {
     })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err))
+    currentUser.isPublic = bool
   }
 
   return (
