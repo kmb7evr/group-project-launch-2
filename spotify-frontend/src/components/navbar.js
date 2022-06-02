@@ -32,7 +32,7 @@ function Navbar(props) {
       <Link to="/LikedSongs" state={{ accessToken: props.accessToken, songs: props.likedSongs }}>Liked Songs</Link> |{" "}
       <Link to="/TopSongs" state={{ accessToken: props.accessToken, songs: props.topSongs, yearSongs: props.topSongsY, monthSongs: props.topSongsM }}>Top Songs</Link> |{" "}
       <Link to="/TopArtists" state={{ accessToken: props.accessToken }}>Top Artists</Link> |{" "}
-      <Link to="/Inbox" state={{ accessToken: props.accessToken }}>Inbox</Link> |{" "}
+      <Link to="/Inbox" state={{ accessToken: props.accessToken }}>Inbox</Link> {" "}
     </div>
   );
 }

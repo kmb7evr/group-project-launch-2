@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import "../App.css";
 import FilterList from './filterList.js'
 import { useLocation } from 'react-router-dom';
+import {buttonStyle} from './pagecss.js';
 
 function Forum() {
   const location = useLocation();
@@ -63,18 +64,7 @@ const addForum = (e) => {
               <h1>Create New Forum</h1>
               <textarea type="text" ref={newForumNameRef} rows="2" cols="50"
                 style={{borderRadius: '25px'}}/>
-                <input type="submit" value="Create New Forum" style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'blue',
-                    border: '1px solid rgba(0, 0, 0, 0.05)', 
-                    height: "50px",
-                    width: "200px",
-                    fontSize: '20px',
-                    borderRadius: '10px',
-                    padding: '20px'
-                  }}/>
+                <input type="submit" value="Create New Forum" style={buttonStyle}/>
           </form>
         </center>
 
