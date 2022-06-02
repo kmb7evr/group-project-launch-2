@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import IndivForum from "./IndivForum.js";
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 function Conversation() {
     const location = useLocation();
