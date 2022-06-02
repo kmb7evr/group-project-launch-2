@@ -20,10 +20,10 @@ function DiscoverPage(props) {
       .catch((err) => console.log(err))
 
     getTopSongs()
-    .then(()=>{postSongs()});
+    .then(()=>{postSongs()});//if there's a mistake, it's probably here
     
     getTopArtists()
-    .then(()=>{postArtists()});
+    .then(()=>{postArtists()});//if there's a mistake, it's probably here
 
   }, []);
 
