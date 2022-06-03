@@ -11,7 +11,11 @@ function Logout() {
   return (
     <div className="App">
         <Navbar />
-    You have successfully logged out. To log back in, <Link to="/" > click here</Link>
+        <br />
+        <br />
+        <br />
+        <br />
+        You have successfully logged out. To log back in, <Link to="/" > click here</Link>
     </div>
   );
 }

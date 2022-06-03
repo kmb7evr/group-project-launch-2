@@ -53,7 +53,10 @@ function DiscoverPage(props) {
 
   return (
     <div className="App">
-      <h3> Welcome to this Discover Page! </h3>
+      <br />
+      <br />
+      <br />
+      <h3> Welcome to your Spotify Discover Page! </h3>
       <h5> {"Currently logged in as: " + (currentUser && currentUser.username)} </h5>
       <Navbar />
       <Button  onClick={() => setAccessToken("")}variant="contained">

@@ -83,8 +83,11 @@ function UserProfile() {
 
   return (
     <div className="App">
-      <h2> {currentUser.username}'s Profile </h2>
       <Navbar />
+        <br />
+        <br />
+        <br />
+        <h2> {currentUser.username}'s Profile </h2>
       <table>
         <tr>
           <td>Spotify Username: </td>
