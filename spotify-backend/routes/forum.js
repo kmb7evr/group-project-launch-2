@@ -17,6 +17,19 @@ router.get("/forumPosts", async (req, res, next) => {
     const queryRes = query(collection(db, "forumPosts"), where("forum", "==", name));
     const matchingForumPosts = await getDocs(queryRes);
     matchingForumPosts.forEach((doc) => forumPosts.push({id: doc.id, ...doc.data()}))
+ 
+    forumPosts.sort((a, b) =>{
+        let time1 = a.time,
+            time2 = b.time;
+
+        if (time1 < time2) {
+            return 1;
+        }
+        if (time1 > time2) {
+            return -1;
+        }
+        return 0;
+    });
     res.json({result: forumPosts})
 })
 
@@ -38,7 +51,6 @@ router.post("/postedInForum", async (req, res, next) => {
     await updateDoc(postRef, {
        posts: increment(1)
     });
-    res.send("Received")
 })
 
 router.post("/createForum", (req, res, next) => {
