@@ -97,8 +97,6 @@ function TopSongs(props) {
                   maxWidth: 400,
                   justifyContent: 'right',
                   m: 2
-
-
                 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'left', flexGrow: 1 }}>
                     <CardContent sx={{

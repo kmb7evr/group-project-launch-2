@@ -165,7 +165,6 @@ function UserProfile() {
           justifyContent: "space-around",
           mx: 95
         }}>
-          <Button variant="contained" color="black" type="button">Save Changes</Button>
           <td><Typography> {privacy ? "Your profile is currently PUBLIC. Would you like to switch to PRIVATE?" : "Your profile is current PRIVATE. Would you like to switch to PUBLIC?"} </Typography></td>
           <Button variant="contained" color="black" type="button" onClick={() => switchPrivacy(currentUser.id)}>Yes, switch my privacy settings </Button>
         </Box>
