@@ -1,14 +1,14 @@
 import Navbar from "./navbar";
-import { useLocation } from "react-router";
 import { useState, useEffect, useContext } from "react";
 import { Box, Card, CardMedia, Typography, CardContent } from '@mui/material/';
 import { AccessTokenContext } from "../Contexts/accessTokenContext";
 
 
 function TopSongs(props) {
-  const [songs, setTopSongs] = useState([]);
-  const [yearSongs, setTopSongsY] = useState([]);
-  const [monthSongs, setTopSongsM] = useState([]);
+
+  const [songs, setTopSongs] = useState();
+  const [yearSongs, setTopSongsY] = useState();
+  const [monthSongs, setTopSongsM] = useState();
 
   const { accessToken } = useContext(AccessTokenContext);
   useEffect(() => {
