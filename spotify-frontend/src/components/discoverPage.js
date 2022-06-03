@@ -59,9 +59,6 @@ function DiscoverPage(props) {
       <h3> Welcome to your Spotify Discover Page! </h3>
       <h5> {"Currently logged in as: " + (currentUser && currentUser.username)} </h5>
       <Navbar setPage="Home" />
-      <Button onClick={() => setAccessToken("")} variant="contained">
-        Log Out
-      </Button>
       <table>
         {allUsers && allUsers.map((user) => user.isPublic && tableCell(user))}
       </table>

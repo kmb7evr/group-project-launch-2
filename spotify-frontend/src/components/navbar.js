@@ -1,14 +1,8 @@
-import { Link, Outlet } from "react-router-dom";
-import { TextField, Box, Button, Typography, AppBar, Toolbar, createTheme, ThemeProvider } from '@mui/material'
-import React, { useRef } from 'react'
+import { Link } from "react-router-dom";
+import { Button, Typography, AppBar, Toolbar, createTheme, ThemeProvider } from '@mui/material'
+import React from 'react'
 import { AccessTokenContext } from '../Contexts/accessTokenContext';
-import { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
-
-
-
+import { useContext } from 'react';
 
 const theme = createTheme({
   palette: {
@@ -22,6 +16,7 @@ const theme = createTheme({
     },
   },
 });
+
 const navbarData = [
   {
     label: "Home",
@@ -58,6 +53,7 @@ const navbarData = [
 ];
 
 function Navbar(props) {
+  const { accessToken } = useContext(AccessTokenContext);
 
   const displayDesktop = () => {
     return (
@@ -93,6 +89,7 @@ function Navbar(props) {
       }
       return (
         <Button
+        disabled = {!accessToken}
           {...{
 
             key: label,
