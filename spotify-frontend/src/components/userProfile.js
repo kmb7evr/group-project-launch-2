@@ -7,29 +7,16 @@ import { AccessTokenContext } from "../Contexts/accessTokenContext";
 
 function UserProfile() {
   const { accessToken, allUsers, currentUser } = useContext(AccessTokenContext);
-
-  const location = useLocation();
-  const [user, setUser] = useState();
-  const [privacy, setPrivacy] = useState(user.isPublic)
-  const [username1, setUsername1] = useState(user.username)
-  const [firstName1, setFirstName1] = useState(user.firstName)
-  const [lastName1, setLastName1] = useState(user.lastName)
-  const [email1, setEmail1] = useState(user.email)
+  const [privacy, setPrivacy] = useState(currentUser.isPublic)
+  const [username1, setUsername1] = useState(currentUser.username)
+  const [firstName1, setFirstName1] = useState(currentUser.firstName)
+  const [lastName1, setLastName1] = useState(currentUser.lastName)
+  const [email1, setEmail1] = useState(currentUser.email)
   const userRef1 = useRef();
   const userRef2 = useRef();
   const userRef3 = useRef();
   const userRef4 = useRef();
-
-  useEffect(() => {
-    // fetch("http://localhost:9000/users/usernameget?token=" + accessToken).then(res => res.json())
-    //   .then(data => setUsername(data.display_name))
-
-  }, [])
-
-
-
-
-
+  
   const updateUsername = async (userID) => {
     const val = userRef1.current.value;
     axios.put("http://localhost:9000/users/username", {
@@ -40,6 +27,7 @@ function UserProfile() {
       .catch((err) => console.log(err))
     userRef1.current.value = "";
     setUsername1(val)
+    currentUser.username = val
   }
 
   const updateFirstName = async (userID) => {
@@ -52,6 +40,7 @@ function UserProfile() {
       .catch((err) => console.log(err))
     userRef2.current.value = "";
     setFirstName1(val)
+    currentUser.firstName = val
   }
 
   const updateLastName = async (userID) => {
@@ -64,6 +53,7 @@ function UserProfile() {
       .catch((err) => console.log(err))
     userRef3.current.value = "";
     setLastName1(val)
+    currentUser.lastName = val
   }
 
   const updateEmail = async (userID) => {
@@ -76,6 +66,7 @@ function UserProfile() {
       .catch((err) => console.log(err))
     userRef4.current.value = "";
     setEmail1(val)
+    currentUser.email = val
   }
 
   const switchPrivacy = async (userID) => {
@@ -87,6 +78,7 @@ function UserProfile() {
     })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err))
+    currentUser.isPublic = bool
   }
 
   return (

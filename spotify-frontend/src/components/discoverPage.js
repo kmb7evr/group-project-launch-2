@@ -3,43 +3,32 @@ import { Button, Typography, Box } from '@mui/material';
 import Navbar from "./navbar";
 import { useState, useEffect, useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { AccessTokenContext } from "../Contexts/accessTokenContext";
 import axios from 'axios';
 
 function DiscoverPage(props) {
-  const [userData, setUserData] = useState();
-  const [currUsername, setCurrUsername] = useState();
-  const [user, setUser] = useState();
-  const [topsongs, setTopSongs] = useState([]);
-  const [topsongsY, setTopSongsY] = useState([]);
-  const [topsongsM, setTopSongsM] = useState([]);
-  const [likedSongs, setLikedSongs] = useState([]);
+  
+  const { allUsers, currentUser, setCurrentUser, setAccessToken, accessToken } = useContext(AccessTokenContext);
+  const [currentUsername, setCurrentUsername] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:9000/users/data")
-      .then((res) => { return (res.json()); })
-      .then((text) => { setUserData(text.result) })
-      .catch((err) => console.log(err))
-
-
-
-    fetch("http://localhost:9000/users/usernameget?token=" + props.accessToken).then(res => res.json())
-      .then(data => setCurrUsername(data.display_name))
+    fetch("http://localhost:9000/users/usernameget?token=" + accessToken).then(res => res.json())
+    .then(data => setCurrentUsername(data.display_name))
   }, []);
 
-
   useEffect(() => {
-    if (userData && currUsername) {
+    if (currentUsername) {
       let found = false;
-      for (let i = 0; i < userData.length; i++) {
-        if (userData[i].spotifyUsername == currUsername) {
-          setUser(userData[i])
+      for (let i = 0; i < allUsers.length; i++) {
+        if (allUsers[i].spotifyUsername == currentUsername) {
+          setCurrentUser(allUsers[i])
           found = true
         }
       }
       if (!found) {
         const newUser = {
-          spotifyUsername: currUsername,
-          username: currUsername,
+          spotifyUsername: currentUsername,
+          username: currentUsername,
           isPublic: true,
           firstName: "Not Yet Registered",
           lastName: "Not Yet Registered",
@@ -49,40 +38,30 @@ function DiscoverPage(props) {
         axios.post("http://localhost:9000/users/newuser", newUser)
           .then((res) => console.log(res.data))
           .catch((err) => console.log(err))
-        setUser(newUser)
+        setCurrentUser(newUser)
       }
     }
-  }, [userData, currUsername]);
+  }, [currentUsername]);
 
   const tableCell = (element) => {
     return (
       <tr>
-        <td><Link to="/OtherUserComponent" state={{ user: element }}>{element.spotifyUsername}</Link> </td>
+        <td><Link to="/OtherUserComponent" state={{ user: element }}>{element.username}</Link> </td>
         <td><button type="button">Send Message</button></td>
       </tr>
     );
   }
-  console.log("likedSOngs")
-  console.log(likedSongs)
-  console.log("topsongs")
-  console.log(topsongs)
+
   return (
     <div className="App">
       <h3> Welcome to this Discover Page! </h3>
-      <h5> {"Currently logged in as: " + currUsername} </h5>
-      <Navbar
-      // accessToken={props.accessToken}
-      // currUser={user}
-      // topSongs={topsongs}
-      // topSongsY={topsongsY}
-      // topSongsM={topsongsM}
-      // likedSongs={likedSongs}
-      />
-      <Button  variant="contained">
+      <h5> {"Currently logged in as: " + (currentUser && currentUser.username)} </h5>
+      <Navbar />
+      <Button  onClick={() => setAccessToken("")}variant="contained">
         Log Out
       </Button>
       <table>
-        {userData && userData.map((user) => user.isPublic && tableCell(user))}
+        {allUsers && allUsers.map((user) => user.isPublic && tableCell(user))}
       </table>
     </div>
   );

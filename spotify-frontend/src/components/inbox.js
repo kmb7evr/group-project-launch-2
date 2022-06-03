@@ -31,7 +31,6 @@ function Inbox() {
       .catch((err) => console.log(err))
 
   }, [])
-  //.then((text) => setContactList(text.contactList)) 
 
   const setPartner = (e) => {
     e.preventDefault();
