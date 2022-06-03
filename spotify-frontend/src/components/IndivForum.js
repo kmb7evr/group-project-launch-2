@@ -9,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import {buttonStyle} from './pagecss.js';
 import LikeButton from './likeButton.js'
+import TextField from "@mui/material/TextField";
 
 function IndivForum() {
     const [forumPosts, setForumPosts]=useState([]);
@@ -80,9 +81,9 @@ const likePost = async (id) => {
 
   return (
     <div className="ForumPost">
-      <div style={{border: '1px solid black'}}>
+      <div style={{border: '0.1px solid black'}}>
         <br></br>
-      <div style={{border: '1px solid black'}}>
+      <div style={{border: '0.1px solid black'}}>
         <Link to="/Forum" style={{
           margin: "20px"}}>Return to Forums</Link> 
             <header style={{
@@ -95,9 +96,15 @@ const likePost = async (id) => {
         </div>
         <center>
           <form onSubmit={addPost} >
-          <h1> New Post </h1>
-          <textarea type="text" ref={messageRef} rows="2" cols="50"
-                  style={{borderRadius: '25px'}}/> <br></br>
+          <h1 style={{padding: "10px"}}> New Post </h1> <br></br>
+
+
+            <TextField varient='outlined'
+                id="outlined-basic"
+                variant="outlined"
+                label="New Post"
+                inputRef={messageRef}
+              /> <br></br> <br></br>
 
                 <Button type="submit"
                     variant='outlined'
@@ -105,10 +112,9 @@ const likePost = async (id) => {
                 </Button>
           </form>
         </center>
-        <hr></hr>
         <br></br>
         <br></br>
-        <br></br>
+
 
     <center>
     {forumPosts && forumPosts.map((p) =>
