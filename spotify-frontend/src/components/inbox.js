@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 import { useLocation } from 'react-router-dom';
 import { AccessTokenContext } from "../Contexts/accessTokenContext";
+import { Box, Card, CardMedia, Typography, CardContent, createTheme, ThemeProvider } from '@mui/material/';
 
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
@@ -40,10 +41,16 @@ function Inbox() {
 
   return ( //need to add datalist capabilities
     <div className="App">
-      <h2> Inbox </h2>
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <h1> Inbox </h1>
       <Navbar setPage="Inbox" /> <br></br>
       <form onSubmit={setPartner}>
         <Autocomplete
+
           disablePortal
           options={userNamesOnly}
           renderInput={(params) => <TextField
@@ -56,7 +63,6 @@ function Inbox() {
           />}
         />
         <Button type="submit" value="Start Conversation">  Start Conversation</Button>
-
       </form>
 
       {convPart !== "" && //may need to change that

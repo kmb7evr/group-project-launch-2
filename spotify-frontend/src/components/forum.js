@@ -53,8 +53,12 @@ function Forum() {
   return (
 
     <div className="Forum">
+      <br />
+      <br />
+      <br />
+
       <center>
-        <h2> Forum </h2>
+        <h1> Forum </h1>
         <Navbar setPage="Forum" /> <br></br>
         <div className="search">
           <TextField varient='outlined'
