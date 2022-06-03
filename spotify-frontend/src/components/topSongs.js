@@ -82,12 +82,7 @@ function TopSongs(props) {
                     alt={"album cover for" + val.album.name}
                   />
                 </Card>
-
-
               </Box >)
-
-
-
             })
           }
         </Box>

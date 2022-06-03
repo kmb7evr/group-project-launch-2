@@ -56,8 +56,10 @@ function DiscoverPage(props) {
       <br />
       <br />
       <br />
-      <h3> Welcome to your Spotify Discover Page! </h3>
-      <h5> {"Currently logged in as: " + (currentUser && currentUser.username)} </h5>
+      <br />
+
+      <h1> Welcome to your Spotify Discover Page! </h1>
+      <h3> {"Currently logged in as: " + (currentUser && currentUser.username)} </h3>
       <Navbar setPage="Home" />
       <table>
         {allUsers && allUsers.map((user) => user.isPublic && tableCell(user))}
