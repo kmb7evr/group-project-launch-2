@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background: #84bd84;
+  }
+  
+  .App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .form {
+    max-width: 330px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding: 50px;
+    margin-top: 50px;
+  }
+  
