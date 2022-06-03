@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const db = require("./firebase")
 
-const { getDocs, doc, collection, addDoc, updateDoc } = require("firebase/firestore")
+const { getDocs, doc, collection, addDoc, updateDoc, arrayUnion } = require("firebase/firestore")
 var fetch = require('node-fetch');
 
 
@@ -207,6 +207,43 @@ router.get("/data", async (req, res, next) => {
   docs.forEach((doc) => allDocData.push(doc.data()))
   res.json({ result: allDocData })
 })
+
+router.get("/getSongs", async (req, res, next) => {
+  const allDocData = []
+  // console.log(req.query)  // shows the URL params (stuff after the ? in the URL)
+  
+  const docRef = doc(db, "cities", req.body.id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    allDocData.push(docSnap.data().songs);
+    res.json({ result: allDocData })
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+})//NEW 1
+
+
+router.put("/put/songs", async (req, res, next) => {
+  const postRef = doc(db, "users", req.body.id);
+  
+  await updateDoc(postRef, {
+    songs: arrayUnion(req.body.songs)
+  });
+  res.send("Received1")
+})
+
+router.put("/getTopArtists", async (req, res, next) => {
+  console.log(req.body.artists);
+
+  const postRef = doc(db, "users", req.body.id);
+  await updateDoc(postRef, {
+    artists: req.body.artists
+  });
+  res.send("Received2")
+})
+
 
 router.put("/privacy", async (req, res, next) => {
   const postRef = doc(db, "users", req.body.id);
