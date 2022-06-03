@@ -7,13 +7,13 @@ import { AccessTokenContext } from "../Contexts/accessTokenContext";
 import axios from 'axios';
 
 function DiscoverPage(props) {
-  
+
   const { allUsers, currentUser, setCurrentUser, setAccessToken, accessToken } = useContext(AccessTokenContext);
   const [currentUsername, setCurrentUsername] = useState();
 
   useEffect(() => {
     fetch("http://localhost:9000/users/usernameget?token=" + accessToken).then(res => res.json())
-    .then(data => setCurrentUsername(data.display_name))
+      .then(data => setCurrentUsername(data.display_name))
   }, []);
 
   useEffect(() => {
@@ -58,8 +58,8 @@ function DiscoverPage(props) {
       <br />
       <h3> Welcome to your Spotify Discover Page! </h3>
       <h5> {"Currently logged in as: " + (currentUser && currentUser.username)} </h5>
-      <Navbar />
-      <Button  onClick={() => setAccessToken("")}variant="contained">
+      <Navbar setPage="Home" />
+      <Button onClick={() => setAccessToken("")} variant="contained">
         Log Out
       </Button>
       <table>

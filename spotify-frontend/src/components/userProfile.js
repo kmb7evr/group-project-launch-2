@@ -16,7 +16,7 @@ function UserProfile() {
   const userRef2 = useRef();
   const userRef3 = useRef();
   const userRef4 = useRef();
-  
+
   const updateUsername = async (userID) => {
     const val = userRef1.current.value;
     axios.put("http://localhost:9000/users/username", {
@@ -83,11 +83,11 @@ function UserProfile() {
 
   return (
     <div className="App">
-      <Navbar />
-        <br />
-        <br />
-        <br />
-        <h2> {currentUser.username}'s Profile </h2>
+      <Navbar setPage="User Profile" />
+      <br />
+      <br />
+      <br />
+      <h2> {currentUser.username}'s Profile </h2>
       <table>
         <tr>
           <td>Spotify Username: </td>

@@ -19,7 +19,7 @@ function LikedSongs() {
   return (
     <div className="App">
       <h2> Liked Songs </h2>
-      <Navbar
+      <Navbar setPage="Liked Songs"
       />
 
 

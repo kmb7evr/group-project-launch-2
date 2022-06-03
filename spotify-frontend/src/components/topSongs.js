@@ -26,7 +26,7 @@ function TopSongs(props) {
   return (
     <div className="App">
       <Navbar
-      />
+        setPage="Top Songs" />
       <br />
       <br />
       <br />

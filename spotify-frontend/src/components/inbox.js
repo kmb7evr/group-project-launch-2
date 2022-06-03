@@ -41,7 +41,7 @@ function Inbox() {
   return ( //need to add datalist capabilities
     <div className="App">
       <h2> Inbox </h2>
-      <Navbar /> <br></br>
+      <Navbar setPage="Inbox" /> <br></br>
       <form onSubmit={setPartner}>
         <Autocomplete
           disablePortal

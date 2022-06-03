@@ -19,7 +19,7 @@ function TopArtists() {
   }, [])
   return (
     <div className="App">
-      <Navbar />
+      <Navbar setPage="Top Artists" />
       <br />
       <br />
       <br />
