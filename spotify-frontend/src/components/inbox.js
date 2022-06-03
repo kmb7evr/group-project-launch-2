@@ -12,12 +12,11 @@ import TextField from '@mui/material/TextField';
 function Inbox() {
   const { accessToken, currentUser, allUsers } = useContext(AccessTokenContext);
 
-
   const [convPart, setConvPart] = useState("");
   const location = useLocation();
   const [contactList, setContactList] = useState([]);
   const newConversationRef = useRef(null);
-  const userName = "testUser" //currentUser.username //need to change here DDDDDDD
+  const userName = currentUser.username //need to change here DDDDDDD
   const [userNamesOnly, setuserNamesOnly] = useState([]);
 
   useEffect(() => {
