@@ -30,6 +30,8 @@ function TopSongs(props) {
       <br />
       <br />
       <br />
+      <br></br>
+
       <h1>Top Songs</h1>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         <Typography component="div" variant="h5">

@@ -18,7 +18,14 @@ function LikedSongs() {
 
   return (
     <div className="App">
-      <h2> Liked Songs </h2>
+      <br></br>
+      <br></br>
+
+      <br></br>
+      <br></br>
+
+
+      <h1> Liked Songs </h1>
       <Navbar setPage="Liked Songs"
       />
 

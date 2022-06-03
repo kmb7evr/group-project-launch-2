@@ -23,6 +23,8 @@ function TopArtists() {
       <br />
       <br />
       <br />
+      <br></br>
+
       <h1>Top Artists</h1>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         <Typography component="div" variant="h5">
