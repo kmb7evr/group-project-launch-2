@@ -16,7 +16,7 @@ function UserProfile() {
   const userRef2 = useRef();
   const userRef3 = useRef();
   const userRef4 = useRef();
-  
+
   const updateUsername = async (userID) => {
     const val = userRef1.current.value;
     axios.put("http://localhost:9000/users/username", {
