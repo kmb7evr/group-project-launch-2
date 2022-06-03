@@ -132,25 +132,25 @@ function UserProfile() {
               <tr>
                 <td><Typography>Username: </Typography></td>
                 <td><Typography >{username1}</Typography></td>
-                <TextField size="small" ref={userRef1} placeholder={"Edit Username..."} />
+                <TextField size="small" inputRef={userRef1} placeholder={"Edit Username..."} />
                 <Button variant="contained" color="selected" onClick={() => updateUsername(currentUser.id)} >Change</Button>
               </tr>
               <tr>
                 <td><Typography>First name: </Typography></td>
                 <td><Typography>{firstName1}</Typography></td>
-                <TextField size="small" ref={userRef2} placeholder={"Edit First Name..."} />
+                <TextField size="small" inputRef={userRef2} placeholder={"Edit First Name..."} />
                 <Button variant="contained" color="selected" onClick={() => updateFirstName(currentUser.id)} >Change</Button>
               </tr>
               <tr>
                 <td><Typography>Last name: </Typography></td>
                 <td><Typography>{lastName1} </Typography></td>
-                <TextField size="small" ref={userRef3} placeholder={"Edit Last Name..."} />
+                <TextField size="small" inputRef={userRef3} placeholder={"Edit Last Name..."} />
                 <Button variant="contained" color="selected" onClick={() => updateLastName(currentUser.id)} >Change</Button>
               </tr>
               <tr>
                 <td><Typography>Email: </Typography></td>
                 <td><Typography>{email1} </Typography></td>
-                <TextField size="small" ref={userRef4} placeholder={"Edit Email..."} />
+                <TextField size="small" inputRef={userRef4} placeholder={"Edit Email..."} />
                 <Button variant="contained" color="selected" onClick={() => updateEmail(currentUser.id)} >Change</Button>
               </tr>
               \
