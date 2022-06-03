@@ -4,15 +4,11 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 
 function FilterList(props) {
-    //const justNames=[]
-    //props.forumNames.forEach((f) => justNames.push(f.forumName))
 
     const filteredData = props.forumNames.filter((el) => {
-        //if no input the return the original
         if (props.input === '') {
             return el;
         }
-        //return the item which contains the user input
         else {
             return el.forumName.toLowerCase().includes(props.input)
         }

@@ -7,12 +7,6 @@ function TopArtists() {
   const [artists, setTopArtists] = useState();
   const [yearArtists, setTopArtistsY] = useState();
   const [monthArtists, setTopArtistsM] = useState();
-  // const location = useLocation();
-  // const songs = location.state?.topSongs;
-  // const yearSongs = location.state?.yearSongs;
-  // const monthSongs = location.state?.monthSongs;
-  // const likedSongs = location.state?.likedSongs;
-  // const accessToken = location.state?.accessToken;
   const { accessToken } = useContext(AccessTokenContext);
   useEffect(() => {
     fetch("http://localhost:9000/users/artistAll?token=" + accessToken).then(res => res.json())

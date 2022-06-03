@@ -9,11 +9,6 @@ function LikedSongs() {
 
   const [songs, setLikedSongs] = useState();
 
-
-
-
-
-
   useEffect(() => {
     console.log(accessToken)
     fetch("http://localhost:9000/users/likedSongs?token=" + accessToken).then(res => res.json())
@@ -25,11 +20,6 @@ function LikedSongs() {
     <div className="App">
       <h2> Liked Songs </h2>
       <Navbar
-      // likedSongs={songs}
-      // topSongs={topSongs}
-      // yearSongs={yearSongs}
-      // monthSongs={monthSongs}
-      // accessToken={accessToken}
       />
 
 
@@ -67,12 +57,7 @@ function LikedSongs() {
                 alt={"album cover for" + val.track.album.name}
               />
             </Card>
-
-
           </Box >)
-
-
-
         })
       }
     </div>

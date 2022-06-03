@@ -8,25 +8,16 @@ import axios from 'axios';
 
 function Navbar(props) {
 
-
-  const [userData, setUserData] = useState();
-
-  useEffect(() => {
-    fetch("http://localhost:9000/users/data")
-      .then((res) => { return (res.json()); })
-      .then((text) => { setUserData(text.result) })
-      .catch((err) => console.log(err))
-  }, []);
-
   return (
     <div className="App">
-      <Link to="/" state={{ accessToken: props.accessToken }}>Home</Link> |{" "}
-      <Link to="/Forum" state={{ accessToken: props.accessToken }}>Forum</Link> |{" "}
-      <Link to="/LikedSongs" state={{ accessToken: props.accessToken, topSongs: props.topSongs, yearSongs: props.topSongsY, monthSongs: props.topSongsM, likedSongs: props.likedSongs }}>Liked Songs</Link> |{" "}
-      <Link to="/TopSongs" state={{ accessToken: props.accessToken, topSongs: props.topSongs, yearSongs: props.topSongsY, monthSongs: props.topSongsM, likedSongs: props.likedSongs }}>Top Songs</Link> |{" "}
-      <Link to="/TopArtists" state={{ accessToken: props.accessToken }}>Top Artists</Link> |{" "}
-      <Link to="/Inbox" state={{ accessToken: props.accessToken }}>Inbox</Link> | {" "}
-      <Link to="/UserProfile" state={{ currUser: props.currUser, accessToken: props.accessToken }}>User Profile</Link> {" "}
+      <Link to="/" >Home</Link> |{" "}
+      <Link to="/Forum" >Forum</Link> |{" "}
+      <Link to="/LikedSongs" >Liked Songs</Link> |{" "}
+      <Link to="/TopSongs" >Top Songs</Link> |{" "}
+      <Link to="/TopArtists" >Top Artists</Link> |{" "}
+      <Link to="/Inbox" >Inbox</Link> | {" "}
+      <Link to="/UserProfile" >User Profile</Link> {" "}
+      <Link to="/Logout" >Log Out</Link> {" "}
     </div>
   );
 }

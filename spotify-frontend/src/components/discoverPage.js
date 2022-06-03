@@ -47,7 +47,6 @@ function DiscoverPage(props) {
     return (
       <tr>
         <td><Link to="/OtherUserComponent" state={{ user: element }}>{element.username}</Link> </td>
-        <td><button type="button">Send Message</button></td>
       </tr>
     );
   }

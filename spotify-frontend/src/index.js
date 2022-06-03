@@ -15,6 +15,7 @@ import OtherUserComponent from "./components/otherUserComponent";
 import Navbar from "./components/navbar";
 import { AccessTokenContext } from "./Contexts/accessTokenContext";
 import AccessTokenProvider from "./Contexts/accessTokenContext";
+import Logout from "./components/logout"
 
 const rootElement = document.getElementById("root");
 render(
@@ -34,6 +35,7 @@ render(
         <Route path='OtherUserComponent' element={<OtherUserComponent />} />
         <Route path='Forum/indivForum' element={<IndivForum />} />
         <Route path="NavBar" element={<Navbar />} />
+        <Route path="Logout" element={<Logout />} />
       </Routes>
     </BrowserRouter>
   </AccessTokenProvider>,
