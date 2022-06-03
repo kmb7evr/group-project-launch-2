@@ -26,7 +26,12 @@ function TopSongs(props) {
   return (
     <div className="App">
       <Navbar
-      />
+        setPage="Top Songs" />
+      <br />
+      <br />
+      <br />
+      <br></br>
+
       <h1>Top Songs</h1>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         <Typography component="div" variant="h5">

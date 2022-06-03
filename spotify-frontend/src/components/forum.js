@@ -8,7 +8,7 @@ import "../App.css";
 import FilterList from './filterList.js'
 import { useLocation } from 'react-router-dom';
 import { AccessTokenContext } from "../Contexts/accessTokenContext";
-import {buttonStyle} from './pagecss.js';
+import { buttonStyle } from './pagecss.js';
 
 function Forum() {
   const location = useLocation();
@@ -45,45 +45,38 @@ function Forum() {
       .then((res) => res.json())
       .then((text) => setForumNames(text.result))
       .catch((err) => console.log(err))
-
-      /*
-      const forumNameIndiv=newForumNameRef.current.value
-
-      
-      setForumNames([{ creator: user,
-          forumName: forumNameIndiv,
-          posts: 0
-        }, ...forumNames])
-        */
-      
+  
     newForumNameRef.current.value = ""
   }
 
   return (
     <div className="Forum">
+      <br />
+      <br />
+      <br />
+
       <center>
-        <h2> Forum </h2>
-        <Navbar /> <br></br>
-          <div className="search">
-            <TextField varient='outlined'
-              id="outlined-basic"
-              onChange={inputHandler}
-              variant="outlined"
-              label="Search"
-            /> <br></br> <br></br>  <br></br> 
-            <FilterList forumNames={forumNames} input={inputText} user={user} />
-          </div>
-          <hr></hr>
-          <form onSubmit={addForum} >
-              <h1>Create New Forum</h1>
-              <textarea type="text" ref={newForumNameRef} rows="2" cols="50"
-                style={{borderRadius: '25px'}}/> <br></br>
-                <Button type="submit"
-                    variant='outlined'
-                    sx={{ color: '#000000', borderColor: '#000000' }}>Create New Forum<br></br>
-                </Button>
-          </form>
-        </center>
+        <h1> Forum </h1>
+        <Navbar setPage="Forum" /> <br></br>
+        <div className="search">
+          <TextField varient='outlined'
+            id="outlined-basic"
+            onChange={inputHandler}
+            variant="outlined"
+            label="Search"
+          /> <br></br> <br></br>  <br></br>
+          <FilterList forumNames={forumNames} input={inputText} user={user} />
+        </div>
+        <hr></hr>
+        <form onSubmit={addForum} >
+          <h1>Create New Forum</h1>
+          <textarea type="text" ref={newForumNameRef} rows="2" cols="50" /> <br></br>
+          <Button type="submit"
+            variant='outlined'
+            sx={{ color: '#000000', borderColor: '#000000' }}>Create New Forum<br></br>
+          </Button>
+        </form>
+      </center>
 
     </div>
   );

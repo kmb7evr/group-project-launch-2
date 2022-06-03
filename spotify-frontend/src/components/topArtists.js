@@ -7,12 +7,6 @@ function TopArtists() {
   const [artists, setTopArtists] = useState();
   const [yearArtists, setTopArtistsY] = useState();
   const [monthArtists, setTopArtistsM] = useState();
-  // const location = useLocation();
-  // const songs = location.state?.topSongs;
-  // const yearSongs = location.state?.yearSongs;
-  // const monthSongs = location.state?.monthSongs;
-  // const likedSongs = location.state?.likedSongs;
-  // const accessToken = location.state?.accessToken;
   const { accessToken } = useContext(AccessTokenContext);
   useEffect(() => {
     fetch("http://localhost:9000/users/artistAll?token=" + accessToken).then(res => res.json())
@@ -25,8 +19,13 @@ function TopArtists() {
   }, [])
   return (
     <div className="App">
-      {artists && console.log(artists)}
-      <Navbar />
+      <Navbar setPage="Top Artists" />
+      <br />
+      <br />
+      <br />
+      <br></br>
+
+      <h1>Top Artists</h1>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         <Typography component="div" variant="h5">
           All Time
