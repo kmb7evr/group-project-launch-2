@@ -10,8 +10,12 @@ function Logout() {
 
   return (
     <div className="App">
-        <Navbar />
-    You have successfully logged out. To log back in, <Link to="/" > click here</Link>
+      <Navbar setPage="Log Out" />
+      <br />
+      <br />
+      <br />
+      <br />
+      You have successfully logged out. To log back in, <Link to="/" > click here</Link>
     </div>
   );
 }

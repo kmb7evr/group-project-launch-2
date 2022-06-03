@@ -41,8 +41,16 @@ function Conversation() {
             .then((res) => console.log(res.data))
             .catch((err) => console.log(err))
 
+
+        console.log(conversation)
+        const message=messageRef.current.value
+
+        setConversation([{ user: userName,
+            otherUser: contact,
+            message: message,
+            sent: true}, ...conversation])
         messageRef.current.value = ""
-        window.location.reload(false);
+        //window.location.reload(false);
     }
 
     return (
@@ -68,14 +76,18 @@ function Conversation() {
         {conversation && conversation.map((c, index) => 
             {return c.sent ?
                 <div>
-                <div  style={divStyleMessageSent}>
-                    <p>{c.message}</p>
-                </div> <br></br>
+                    <center>
+                    <div  style={divStyleMessageSent}>
+                        <p>{c.message}</p>
+                    </div> <br></br>
+                    </center>
                 </div>:
                 <div>
-                <div  style={ divStyleMessageRec}>
-                    <p>{c.message}</p> 
-                </div><br></br>
+                    <center>
+                        <div  style={ divStyleMessageRec}>
+                            <p>{c.message}</p> 
+                        </div><br></br>
+                    </center>
                 </div>
             } 
         )}

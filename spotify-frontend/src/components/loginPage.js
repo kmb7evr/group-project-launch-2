@@ -5,8 +5,8 @@ import { useContext, useState } from 'react';
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
-
+import "./styles.css";
+import spotify from "./spotify.png"
 
 function LoginPage(props) {
   const { accessToken, allUsers, currentUser } = useContext(AccessTokenContext);
@@ -39,12 +39,14 @@ function LoginPage(props) {
   }, [])
 
   return (
-    <>
+    <div>
       <br />
-      <Box display='flex' flexDirection='column'>
-        <Button onClick={(e) => onClick(e)} variant="contained">Log Into Spotify</Button>
-      </Box>
-    </>
+      <form className="form">
+        <img src={spotify} />
+        <br />
+        <Button onClick={(e) => onClick(e)} variant="text"  sx={{ color: 'white', backgroundColor: 'black' }}>Log Into Spotify</Button>
+        </form>
+    </div>
   );
 }
 

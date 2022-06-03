@@ -7,7 +7,7 @@ import { AccessTokenContext } from "../Contexts/accessTokenContext";
 import axios from 'axios';
 
 function DiscoverPage(props) {
-  
+
   const { allUsers, currentUser, setCurrentUser, setAccessToken, accessToken } = useContext(AccessTokenContext);
   const [currentUsername, setCurrentUsername] = useState();
 
@@ -134,12 +134,14 @@ function DiscoverPage(props) {
 
   return (
     <div className="App">
-      <h3> Welcome to this Discover Page! </h3>
-      <h5> {"Currently logged in as: " + (currentUser && currentUser.username)} </h5>
-      <Navbar />
-      <Button  onClick={() => setAccessToken("")}variant="contained">
-        Log Out
-      </Button>
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <h1> Welcome to your Spotify Discover Page! </h1>
+      <h3> {"Currently logged in as: " + (currentUser && currentUser.username)} </h3>
+      <Navbar setPage="Home" />
       <table>
         {allUsers && allUsers.map((user) => user.isPublic && tableCell(user))}
       </table>

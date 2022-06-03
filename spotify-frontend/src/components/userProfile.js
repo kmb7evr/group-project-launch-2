@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
 import { AccessTokenContext } from "../Contexts/accessTokenContext";
+import { Box, Card, CardMedia, Typography, CardContent, Button, TextField, createTheme, ThemeProvider } from '@mui/material/';
+
 
 
 function UserProfile() {
@@ -17,6 +19,23 @@ function UserProfile() {
   const userRef3 = useRef();
   const userRef4 = useRef();
 
+
+  const theme = createTheme({
+    palette: {
+      neutral: {
+        main: '#64748B',
+        contrastText: '#fff',
+      },
+      selected: {
+        main: '#1DB954',
+        contrastText: '#fff',
+      },
+      black: {
+        main: '#000000',
+        contrastText: '#fff',
+      },
+    },
+  });
   const updateUsername = async (userID) => {
     const val = userRef1.current.value;
     axios.put("http://localhost:9000/users/username", {
@@ -82,43 +101,78 @@ function UserProfile() {
   }
 
   return (
-    <div className="App">
-      <h2> {currentUser.username}'s Profile </h2>
-      <Navbar />
-      <table>
-        <tr>
-          <td>Spotify Username: </td>
-          <td>{currentUser.spotifyUsername}</td>
-        </tr>
-        <tr>
-          <td>Username: </td>
-          <td>{username1}</td>
-          <input ref={userRef1} placeholder={"Edit Username..."} />
-          <button onClick={() => updateUsername(currentUser.id)} >Change</button>
-        </tr>
-        <tr>
-          <td>First name: </td>
-          <td>{firstName1}</td>
-          <input ref={userRef2} placeholder={"Edit First Name..."} />
-          <button onClick={() => updateFirstName(currentUser.id)} >Change</button>
-        </tr>
-        <tr>
-          <td>Last name: </td>
-          <td>{lastName1} </td>
-          <input ref={userRef3} placeholder={"Edit Last Name..."} />
-          <button onClick={() => updateLastName(currentUser.id)} >Change</button>
-        </tr>
-        <tr>
-          <td>Email: </td>
-          <td>{email1} </td>
-          <input ref={userRef4} placeholder={"Edit Email..."} />
-          <button onClick={() => updateEmail(currentUser.id)} >Change</button>
-        </tr>
-      </table>
-      <button type="button">Save Changes</button>
-      <td> {privacy ? "Your profile is currently PUBLIC. Would you like to switch to PRIVATE?" : "Your profile is current PRIVATE. Would you like to switch to PUBLIC?"} </td>
-      <button type="button" onClick={() => switchPrivacy(currentUser.id)}>Yes, switch my privacy settings </button>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <Navbar setPage="User Profile" />
+        <br />
+        <br />
+        <br />
+        <br />
+        <h1> {currentUser.username}'s Profile </h1>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: "center"
+        }}>
+          <Card
+            sx={{
+              display: 'flex',
+              maxWidth: 700,
+              justifyContent: 'Center',
+              m: 2,
+              style: { backgroundColor: "neutral" }
+
+
+            }}>
+            <table>
+              <tr>
+                <td><Typography>Spotify Username: </Typography></td>
+                <td>
+                  <Typography>{currentUser.spotifyUsername}</Typography></td>
+              </tr>
+              <tr>
+                <td><Typography>Username: </Typography></td>
+                <td><Typography >{username1}</Typography></td>
+                <TextField size="small" ref={userRef1} placeholder={"Edit Username..."} />
+                <Button variant="contained" color="selected" onClick={() => updateUsername(currentUser.id)} >Change</Button>
+              </tr>
+              <tr>
+                <td><Typography>First name: </Typography></td>
+                <td><Typography>{firstName1}</Typography></td>
+                <TextField size="small" ref={userRef2} placeholder={"Edit First Name..."} />
+                <Button variant="contained" color="selected" onClick={() => updateFirstName(currentUser.id)} >Change</Button>
+              </tr>
+              <tr>
+                <td><Typography>Last name: </Typography></td>
+                <td><Typography>{lastName1} </Typography></td>
+                <TextField size="small" ref={userRef3} placeholder={"Edit Last Name..."} />
+                <Button variant="contained" color="selected" onClick={() => updateLastName(currentUser.id)} >Change</Button>
+              </tr>
+              <tr>
+                <td><Typography>Email: </Typography></td>
+                <td><Typography>{email1} </Typography></td>
+                <TextField size="small" ref={userRef4} placeholder={"Edit Email..."} />
+                <Button variant="contained" color="selected" onClick={() => updateEmail(currentUser.id)} >Change</Button>
+              </tr>
+              \
+            </table>
+
+          </Card>
+        </Box>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          flexGrow: 1,
+          justifyContent: "space-around",
+          mx: 95
+        }}>
+          <Button variant="contained" color="black" type="button">Save Changes</Button>
+          <td><Typography> {privacy ? "Your profile is currently PUBLIC. Would you like to switch to PRIVATE?" : "Your profile is current PRIVATE. Would you like to switch to PUBLIC?"} </Typography></td>
+          <Button variant="contained" color="black" type="button" onClick={() => switchPrivacy(currentUser.id)}>Yes, switch my privacy settings </Button>
+        </Box>
+
+
+      </div>
+    </ThemeProvider >
   );
 }
 

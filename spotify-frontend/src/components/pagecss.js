@@ -1,4 +1,6 @@
+import { Calculate } from '@mui/icons-material';
 import { common } from '@mui/material/colors';
+import { textAlign } from '@mui/system';
 // function pagescss(){
     const buttonStyle = {
         display: 'flex',
@@ -15,20 +17,20 @@ import { common } from '@mui/material/colors';
 
     const divStyleMessageSent = {
         display: 'flex',
-        alignItems: 'left',
-        justifyContent: 'left',
+        alignItems: 'center',
+        justifyContent: 'center',
         color: 'black',
         border: '1px solid rgba(0, 0, 0, 0.05)', 
         borderRadius: '25px',
         backgroundColor: '#1982FC',
-        display: 'inline-block',
         padding: '5px', 
-        marginLeft: '50px',
         marginBottom: '5px',
         marginTop: '5px',
         position: 'relative',
-        left: "900px",
-
+        width: '300px',
+        display: 'inline-block',
+        textAlign: 'center',
+        borderBottomRightRadius: "0px"
     }
 
     const divStyleMessageRec = {
@@ -39,13 +41,14 @@ import { common } from '@mui/material/colors';
         border: '1px solid rgba(0, 0, 0, 0.05)', 
         borderRadius: '25px', 
         backgroundColor: '#D3D3D3',
-        display: 'inline-block', 
         padding: '5px',
-        marginLeft: '50px',
         marginBottom: '5px',
         marginTop: '5px',
         position: 'relative',
-        left: "600px"
+        textAlign: 'center',
+        width: '300px',
+        display: 'inline-block',
+        borderBottomLeftRadius: "0px"
     }
 
 export{buttonStyle, divStyleMessageSent, divStyleMessageRec};

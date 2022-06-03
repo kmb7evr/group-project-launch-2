@@ -25,6 +25,42 @@ router.get('/likedSongs', async (req, res, next) => {
     res.status(500).send(err)
   }
 })
+router.get('/likedSongs1', async (req, res, next) => {
+  try {
+    const url = 'https://api.spotify.com/v1/me/tracks?offset=50&limit=50'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
+
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
+router.get('/likedSongs2', async (req, res, next) => {
+  try {
+    const url = 'https://api.spotify.com/v1/me/tracks?offset=100&limit=50'
+    const data = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + req.query.token
+      }
+    }).catch(err => console.log(err))
+      .then(res => res.json())
+      .then(data => data)
+
+    res.status(200).send(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
 
 router.get('/trackYear', async (req, res, next) => {
   try {

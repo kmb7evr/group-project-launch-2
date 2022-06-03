@@ -19,8 +19,13 @@ function TopArtists() {
   }, [])
   return (
     <div className="App">
-      {artists && console.log(artists)}
-      <Navbar />
+      <Navbar setPage="Top Artists" />
+      <br />
+      <br />
+      <br />
+      <br></br>
+
+      <h1>Top Artists</h1>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         <Typography component="div" variant="h5">
           All Time
