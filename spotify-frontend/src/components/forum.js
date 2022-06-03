@@ -18,7 +18,7 @@ function Forum() {
   const location = useLocation();
   const { accessToken, currentUser, allUsers } = useContext(AccessTokenContext);
 
-  const user = currentUser.username //need to change here DDDDDDD
+  const user = currentUser.username
   const [forumNames, setForumNames] = useState([]);
   const newForumNameRef = useRef(null);
 

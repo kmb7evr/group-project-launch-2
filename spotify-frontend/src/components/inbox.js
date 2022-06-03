@@ -16,7 +16,7 @@ function Inbox() {
   const location = useLocation();
   const [contactList, setContactList] = useState([]);
   const newConversationRef = useRef(null);
-  const userName = currentUser.username //need to change here DDDDDDD
+  const userName = currentUser.username
   const [userNamesOnly, setuserNamesOnly] = useState([]);
 
   useEffect(() => {
@@ -31,7 +31,6 @@ function Inbox() {
       .catch((err) => console.log(err))
 
   }, [])
-  //.then((text) => setContactList(text.contactList)) 
 
   const setPartner = (e) => {
     e.preventDefault();

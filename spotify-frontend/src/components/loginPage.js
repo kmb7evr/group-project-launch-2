@@ -10,24 +10,14 @@ import axios from 'axios';
 
 function LoginPage(props) {
   const { accessToken, allUsers, currentUser } = useContext(AccessTokenContext);
-
-
-
   const { setAccessToken, setAllUsers, setCurrentUser } = useContext(AccessTokenContext);
   const [currUsername, setCurrUsername] = useState();
 
-
-
-  const navigate = useNavigate();
-
-
   const onClick = (e) => {
-
     fetch("http://localhost:9000/auth").then(res => res.json())
       .then(data => {
         window.open(data.url)
       })
-
   }
 
   const path = window.location.href.split('/')[3]
@@ -46,41 +36,7 @@ function LoginPage(props) {
       .then((res) => { return (res.json()); })
       .then((text) => { setAllUsers(text.result) })
       .catch((err) => console.log(err))
-
   }, [])
-
-  useEffect(() => {
-    fetch("http://localhost:9000/users/usernameget?token=" + accessToken).then(res => res.json())
-      .then(data => setCurrUsername(data.display_name))
-  }, []);
-
-  useEffect(() => {
-    if (allUsers && currUsername) {
-      let found = false;
-      for (let i = 0; i < allUsers.length; i++) {
-        if (allUsers[i].spotifyUsername == currUsername) {
-          setCurrentUser(allUsers[i])
-          console.log(currentUser);
-          found = true
-        }
-      }
-      if (!found) {
-        const newUser = {
-          spotifyUsername: currUsername,
-          username: currUsername,
-          isPublic: true,
-          firstName: "Not Yet Registered",
-          lastName: "Not Yet Registered",
-          email: "Not Yet Registered",
-          id: "Placeholder"
-        }
-        axios.post("http://localhost:9000/users/newuser", newUser)
-          .then((res) => console.log(res.data))
-          .catch((err) => console.log(err))
-        setCurrentUser(newUser)
-      }
-    }
-  }, [allUsers, currUsername]);
 
   return (
     <>

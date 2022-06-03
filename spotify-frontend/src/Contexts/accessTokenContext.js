@@ -15,7 +15,7 @@ function AccessTokenProvider({ children }) {
     currentUser: currentUser,
     setCurrentUser: setCurrentUser
   }
-  // console.log(obj)
+  
   return (
     <AccessTokenContext.Provider value={obj}>
       {children}
