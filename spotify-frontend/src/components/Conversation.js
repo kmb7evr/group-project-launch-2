@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import IndivForum from "./IndivForum.js";
-import TextareaAutosize from '@mui/material/TextareaAutosize';
+import TextField from '@mui/material/TextField';
 import { border } from "@mui/system";
 import {buttonStyle, divStyleMessageSent, divStyleMessageRec} from './pagecss.js';
 
@@ -63,14 +63,19 @@ function Conversation() {
         </div>
         <center>
         <form onSubmit={sendMessage} >
-                <textarea type="text" ref={messageRef} rows="2" cols="50"
-                style={{borderRadius: '25px'}}/> <br></br>
+                <TextField varient='outlined'
+                    id="outlined-basic"
+                    variant="outlined"
+                    label="New Message"
+                    inputRef={messageRef}
+                    sx={{width: "500px"}}
+                /><br></br><br></br>
                 <Button type="submit"
                     variant='outlined'
-                    sx={{ color: '#000000', borderColor: '#000000' }}>Send<br></br>
+                    sx={{ color: '#000000', borderColor: '#000000', borderRadius: '25px' }}>Send<br></br>
                 </Button>
         </form>
-        <hr></hr>
+        <br></br><hr></hr>
         </center>
         
         {conversation && conversation.map((c, index) => 
