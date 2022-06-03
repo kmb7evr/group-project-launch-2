@@ -7,24 +7,19 @@ import TextField from "@mui/material/TextField";
 import "../App.css";
 import FilterList from './filterList.js'
 import { useLocation } from 'react-router-dom';
-
 import { AccessTokenContext } from "../Contexts/accessTokenContext";
-
-
 import {buttonStyle} from './pagecss.js';
-
 
 function Forum() {
   const location = useLocation();
   const { accessToken, currentUser, allUsers } = useContext(AccessTokenContext);
 
-  const user = "testUser" //currentUser.username //need to change here DDDDDDD
+  const user = currentUser.username //need to change here DDDDDDD
   const [forumNames, setForumNames] = useState([]);
   const newForumNameRef = useRef(null);
 
   const [inputText, setInputText] = useState("");
   let inputHandler = (e) => {
-    //convert input text to lower case
     var lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
@@ -45,19 +40,30 @@ function Forum() {
     })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err))
+    
+      fetch("http://localhost:9000/forum/forums")
+      .then((res) => res.json())
+      .then((text) => setForumNames(text.result))
+      .catch((err) => console.log(err))
 
+      /*
+      const forumNameIndiv=newForumNameRef.current.value
+
+      
+      setForumNames([{ creator: user,
+          forumName: forumNameIndiv,
+          posts: 0
+        }, ...forumNames])
+        */
+      
     newForumNameRef.current.value = ""
-    window.location.reload(false);
   }
 
   return (
-
     <div className="Forum">
       <center>
         <h2> Forum </h2>
         <Navbar /> <br></br>
-
-
           <div className="search">
             <TextField varient='outlined'
               id="outlined-basic"

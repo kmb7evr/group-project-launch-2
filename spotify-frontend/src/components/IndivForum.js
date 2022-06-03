@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import {buttonStyle} from './pagecss.js';
+import LikeButton from './likeButton.js'
 
 function IndivForum() {
     const [forumPosts, setForumPosts]=useState([]);
@@ -26,17 +27,20 @@ useEffect(() => {
 }, [])
 
 const likePost = async (id) => {
-    axios.put("http://localhost:9000/forum/likePost", {
+    await axios.put("http://localhost:9000/forum/likePost", {
       id: id,
       user: user
     })
     .then((res) => console.log(res.data))
     .catch((err) => console.log(err))
-    window.location.reload(false);
+
+    fetch("http://localhost:9000/forum/forumPosts?name=" + forumName)
+    .then((res) => res.json())
+    .then((text) => setForumPosts(text.result))
+    .catch((err) => console.log(err))
   }
 
   const addPost = (e) => {
-    console.log(user)
     e.preventDefault();  // no reloading the page
     var current = new Date();
     axios.post("http://localhost:9000/forum/postedInForum", {
@@ -49,8 +53,12 @@ const likePost = async (id) => {
     .then((res) => console.log(res.data))
     .catch((err) => console.log(err))
 
+    fetch("http://localhost:9000/forum/forumPosts?name=" + forumName)
+    .then((res) => res.json())
+    .then((text) => setForumPosts(text.result))
+    .catch((err) => console.log(err))
+
     messageRef.current.value=""
-    window.location.reload(false);
   }
 
   const timeString = (seconds) => {
@@ -77,8 +85,6 @@ const likePost = async (id) => {
       <div style={{border: '1px solid black'}}>
         <Link to="/Forum" style={{
           margin: "20px"}}>Return to Forums</Link> 
-
-          
             <header style={{
                 margin: "20px"}}>
               <h1> {forumName} </h1>
@@ -117,31 +123,17 @@ const likePost = async (id) => {
             <Grid> 
              <Typography>
                 <h1>{p.message}</h1>
-                {hasLiked(p.likers)  &&
-                    <div>Liked</div>
-                }
-                {!hasLiked(p.likers)  &&
-                    
-                    <Button type="submit"
-                      variant='outlined'
-                      onClick={() => (likePost(p.id))}
-                      sx={{ color: '#000000', borderColor: '#000000' }}>Like
-                    </Button>
-                }
-
+                <LikeButton id={p.id} user={p.poster} likers={p.likers} likePost={likePost}/>
                 {numLikes(p.likers)!==1  &&
                     <div>{" "}{numLikes(p.likers)} Likes</div>
                 }  
                 {numLikes(p.likers)===1  &&
                     <div>{" "}{numLikes(p.likers)} Like</div>
                 }     
-                
-
-                Posted By {p.poster} at {timeString(p.time.seconds)}
+                Posted By {p.poster}
                 </Typography>
             </Grid><br></br>
             </div> 
-            
     )}
         </center>
         
