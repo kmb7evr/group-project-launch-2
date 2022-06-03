@@ -18,7 +18,7 @@ function Forum() {
   const location = useLocation();
   const { accessToken, currentUser, allUsers } = useContext(AccessTokenContext);
 
-  const user = currentUser.username
+  const user = "testUser" //currentUser.username //need to change here DDDDDDD
   const [forumNames, setForumNames] = useState([]);
   const newForumNameRef = useRef(null);
 
@@ -71,8 +71,11 @@ function Forum() {
           <form onSubmit={addForum} >
               <h1>Create New Forum</h1>
               <textarea type="text" ref={newForumNameRef} rows="2" cols="50"
-                style={{borderRadius: '25px'}}/>
-                <input type="submit" value="Create New Forum" style={buttonStyle}/>
+                style={{borderRadius: '25px'}}/> <br></br>
+                <Button type="submit"
+                    variant='outlined'
+                    sx={{ color: '#000000', borderColor: '#000000' }}>Create New Forum<br></br>
+                </Button>
           </form>
         </center>
 

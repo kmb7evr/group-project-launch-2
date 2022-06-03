@@ -72,21 +72,31 @@ const likePost = async (id) => {
 
   return (
     <div className="ForumPost">
-    <Link to="/Forum" style={{
-      margin: "20px"}}>Return to Forums</Link> 
+      <div style={{border: '1px solid black'}}>
+        <br></br>
+      <div style={{border: '1px solid black'}}>
+        <Link to="/Forum" style={{
+          margin: "20px"}}>Return to Forums</Link> 
 
-        <header style={{
-            margin: "20px"}}>
-          <h1> {forumName} </h1>
-          <div> <h3>Creator</h3></div>
-          <p>{creator}</p>
-        </header>
+          
+            <header style={{
+                margin: "20px"}}>
+              <h1> {forumName} </h1>
+              <div> <h3>Creator</h3></div>
+              <p>{creator}</p>
+            </header>
+        </div>
+        </div>
         <center>
           <form onSubmit={addPost} >
           <h1> New Post </h1>
           <textarea type="text" ref={messageRef} rows="2" cols="50"
-                  style={{borderRadius: '25px'}}/>
-                  <input type="submit" value="Post" style={buttonStyle}/>
+                  style={{borderRadius: '25px'}}/> <br></br>
+
+                <Button type="submit"
+                    variant='outlined'
+                    sx={{ color: '#000000', borderColor: '#000000' }}>Post<br></br>
+                </Button>
           </form>
         </center>
         <hr></hr>
@@ -98,24 +108,39 @@ const likePost = async (id) => {
     {forumPosts && forumPosts.map((p) =>
         <div style={
             {
-             border: '2px solid black'
+             border: '1px solid black',
+             borderRadius: '25px',
+             display: 'block',
+             padding: '10px',
             }
           }>
             <Grid> 
              <Typography>
-                Posted By {p.poster} at {timeString(p.time.seconds)}:
-                <p>{p.message}</p>
-
+                <h1>{p.message}</h1>
                 {hasLiked(p.likers)  &&
-                    <p>You have Liked This</p>
+                    <div>Liked</div>
                 }
                 {!hasLiked(p.likers)  &&
-                    <button type="submit" onClick={() => (likePost(p.id))}>Like</button> 
+                    
+                    <Button type="submit"
+                      variant='outlined'
+                      onClick={() => (likePost(p.id))}
+                      sx={{ color: '#000000', borderColor: '#000000' }}>Like
+                    </Button>
                 }
-                <p>Likes: {numLikes(p.likers)}</p>
+
+                {numLikes(p.likers)!==1  &&
+                    <div>{" "}{numLikes(p.likers)} Likes</div>
+                }  
+                {numLikes(p.likers)===1  &&
+                    <div>{" "}{numLikes(p.likers)} Like</div>
+                }     
+                
+
+                Posted By {p.poster} at {timeString(p.time.seconds)}
                 </Typography>
-            </Grid>
-            </div>
+            </Grid><br></br>
+            </div> 
             
     )}
         </center>

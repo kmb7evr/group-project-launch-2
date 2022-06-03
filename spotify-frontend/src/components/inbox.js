@@ -16,7 +16,7 @@ function Inbox() {
   const location = useLocation();
   const [contactList, setContactList] = useState([]);
   const newConversationRef = useRef(null);
-  const userName = currentUser.username
+  const userName = "testUser" //currentUser.username //need to change here DDDDDDD
   const [userNamesOnly, setuserNamesOnly] = useState([]);
 
   useEffect(() => {
