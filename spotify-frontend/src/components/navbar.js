@@ -111,7 +111,7 @@ function Navbar(props) {
 
   const projectLogo = (
     <Typography variant="h6" component="h1" className="logo">
-      Spotify App
+      S-Message
     </Typography>
   );
 
