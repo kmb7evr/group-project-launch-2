@@ -56,7 +56,7 @@ function Forum() {
       <br />
 
       <center>
-        <h1> Forum </h1>
+        <h1 style={{paddingTop: '25px'}}> Forum </h1>
         <Navbar setPage="Forum" /> <br></br>
         <div className="search">
           <TextField varient='outlined'
@@ -69,8 +69,13 @@ function Forum() {
         </div>
         <hr></hr>
         <form onSubmit={addForum} >
-          <h1>Create New Forum</h1>
-          <textarea type="text" ref={newForumNameRef} rows="2" cols="50" /> <br></br>
+          <h1 style={{padding: '25px'}}>Create New Forum</h1>
+          <TextField varient='outlined'
+            id="outlined-basic"
+            variant="outlined"
+            label="New Forum"
+            inputRef={newForumNameRef}
+          /> <br></br><br></br>
           <Button type="submit"
             variant='outlined'
             sx={{ color: '#000000', borderColor: '#000000' }}>Create New Forum<br></br>

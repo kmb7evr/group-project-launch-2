@@ -54,18 +54,21 @@ function Inbox() {
           options={userNamesOnly}
           renderInput={(params) => <TextField
             sx={{
-              width: '30vw'
+              width: '30vw',
+              margin: '10px'
             }}
             {...params}
             label="Users"
             inputRef={newConversationRef}
           />}
         />
-        <Button type="submit" value="Start Conversation">  Start Conversation</Button>
+        <Button type="submit" value="Start Conversation" sx={{
+              margin: '10px'
+            }}>  Start Conversation</Button>
       </form>
 
       {convPart !== "" && //may need to change that
-        <Link to='Conversation' state={{ contact: convPart, userName: userName }}>
+        <Link to='Conversation' state={{ contact: convPart, userName: userName }} style={{textDecoration: 'none'}}>
           <Button
             variant='outlined'
             sx={{ color: '#000000', borderColor: '#000000' }}>Start New Conversation With: {convPart}<br></br>
@@ -74,12 +77,12 @@ function Inbox() {
         </Link>
       }
 
-      <h1>Conversations: </h1>
+      <h1 style={{padding: '25px'}}>Conversations: </h1>
       {contactList.map((contact, index) =>
-        <Link to='Conversation' state={{ contact: contact, userName: userName }}>
+        <Link to='Conversation' state={{ contact: contact, userName: userName }} style={{margin: '25px', textDecoration: 'none'}}>
           <Button
             variant='outlined'
-            sx={{ color: '#000000', borderColor: '#000000' }}>{contact}<br></br>
+            sx={{ color: '#000000', borderColor: '#000000', margin: '5px', padding: '15px' }}>{contact}<br></br>
           </Button>
           <br></br>
         </Link>)
