@@ -9,8 +9,26 @@ import FilterList from './filterList.js'
 import { useLocation } from 'react-router-dom';
 import { AccessTokenContext } from "../Contexts/accessTokenContext";
 import { buttonStyle } from './pagecss.js';
+import { Box, Card, CardMedia, Typography, CardContent, createTheme, ThemeProvider } from '@mui/material/';
+
 
 function Forum() {
+  const theme = createTheme({
+    palette: {
+      neutral: {
+        main: '#64748B',
+        contrastText: '#fff',
+      },
+      selected: {
+        main: '#1DB954',
+        contrastText: '#fff',
+      },
+      black: {
+        main: '#000000',
+        contrastText: '#fff',
+      },
+    },
+  });
   const location = useLocation();
   const { accessToken, currentUser, allUsers } = useContext(AccessTokenContext);
 
@@ -40,12 +58,12 @@ function Forum() {
     })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err))
-    
-      fetch("http://localhost:9000/forum/forums")
+
+    fetch("http://localhost:9000/forum/forums")
       .then((res) => res.json())
       .then((text) => setForumNames(text.result))
       .catch((err) => console.log(err))
-  
+
     newForumNameRef.current.value = ""
   }
 
@@ -54,34 +72,36 @@ function Forum() {
       <br />
       <br />
       <br />
+      <ThemeProvider theme={theme}>
 
-      <center>
-        <h1 style={{paddingTop: '25px'}}> Forum </h1>
-        <Navbar setPage="Forum" /> <br></br>
-        <div className="search">
-          <TextField varient='outlined'
-            id="outlined-basic"
-            onChange={inputHandler}
-            variant="outlined"
-            label="Search"
-          /> <br></br> <br></br>  <br></br>
-          <FilterList forumNames={forumNames} input={inputText} user={user} />
-        </div>
-        <hr></hr>
-        <form onSubmit={addForum} >
-          <h1 style={{padding: '25px'}}>Create New Forum</h1>
-          <TextField varient='outlined'
-            id="outlined-basic"
-            variant="outlined"
-            label="New Forum"
-            inputRef={newForumNameRef}
-          /> <br></br><br></br>
-          <Button type="submit"
-            variant='outlined'
-            sx={{ color: '#000000', borderColor: '#000000' }}>Create New Forum<br></br>
-          </Button>
-        </form>
-      </center>
+        <center>
+          <h1 style={{ paddingTop: '25px' }}> Forum </h1>
+          <Navbar setPage="Forum" /> <br></br>
+          <div className="search">
+            <TextField varient='outlined'
+              id="outlined-basic"
+              onChange={inputHandler}
+              variant="outlined"
+              label="Search"
+            /> <br></br> <br></br>  <br></br>
+            <FilterList forumNames={forumNames} input={inputText} user={user} />
+          </div>
+          <hr></hr>
+          <form onSubmit={addForum} >
+            <h1 style={{ padding: '25px' }}>Create New Forum</h1>
+            <TextField varient='outlined'
+              id="outlined-basic"
+              variant="outlined"
+              label="New Forum"
+              inputRef={newForumNameRef}
+            /> <br></br><br></br>
+            <Button type="submit"
+              variant='contained' color="black"
+              sx={{}}>Create New Forum<br></br>
+            </Button>
+          </form>
+        </center>
+      </ThemeProvider >
 
     </div>
   );
