@@ -19,6 +19,10 @@ function OtherUserComponent() {
   }
     return (
       <div className="App">
+        <br />
+        <br />
+        <br />
+        <br />
           <h2> {user.username}'s Profile </h2>
           <Navbar />
           <table>

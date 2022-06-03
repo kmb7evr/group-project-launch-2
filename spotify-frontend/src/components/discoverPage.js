@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Typography, Box } from '@mui/material';
+import { Button, Typography, Box, Badge } from '@mui/material';
 import Navbar from "./navbar";
 import { useState, useEffect, useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
@@ -46,7 +46,11 @@ function DiscoverPage(props) {
   const tableCell = (element) => {
     return (
       <tr>
-        <td><Link to="/OtherUserComponent" state={{ user: element }}>{element.username}</Link> </td>
+        <td>
+          <Button variant="outlined" sx={{ color: 'white', backgroundColor: 'white' }} >
+            <Link to="/OtherUserComponent" state={{ user: element }}>{element.username}</Link> 
+            </Button>
+            </td>
       </tr>
     );
   }
