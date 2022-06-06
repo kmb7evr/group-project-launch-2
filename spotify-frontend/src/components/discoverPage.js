@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Typography, Box, Badge } from '@mui/material';
+import { Button, Typography, Box, Badge, createTheme, ThemeProvider } from '@mui/material';
 import Navbar from "./navbar";
 import { useState, useEffect, useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
@@ -42,16 +42,34 @@ function DiscoverPage(props) {
       }
     }
   }, [currentUsername]);
-
+  const theme = createTheme({
+    palette: {
+      neutral: {
+        main: '#64748B',
+        contrastText: '#fff',
+      },
+      selected: {
+        main: '#1DB954',
+        contrastText: '#fff',
+      },
+      black: {
+        main: '#000000',
+        contrastText: '#fff',
+      },
+    },
+  });
   const tableCell = (element) => {
     return (
-      <tr>
-        <td>
-          <Button variant="outlined" sx={{ color: 'white', backgroundColor: 'white' }} >
-            <Link to="/OtherUserComponent" state={{ user: element }}>{element.username}</Link> 
+      <ThemeProvider theme={theme}>
+
+        <tr>
+          <td>
+            <Button variant="outlined" sx={{ color: 'white', backgroundColor: 'white' }} >
+              <Link to="/OtherUserComponent" state={{ user: element }}>{element.username}</Link>
             </Button>
-            </td>
-      </tr>
+          </td>
+        </tr>
+      </ThemeProvider>
     );
   }
 
@@ -65,9 +83,15 @@ function DiscoverPage(props) {
       <h1> Welcome to your Spotify Discover Page! </h1>
       <h3> {"Currently logged in as: " + (currentUser && currentUser.username)} </h3>
       <Navbar setPage="Home" />
-      <table>
-        {allUsers && allUsers.map((user) => user.isPublic && tableCell(user))}
-      </table>
+      <Box sx={{
+        display: "flex",
+        justifyContent: "center",
+        m: 5
+      }}>
+        <table>
+          {allUsers && allUsers.map((user) => user.isPublic && tableCell(user))}
+        </table>
+      </Box>
     </div>
   );
 }
